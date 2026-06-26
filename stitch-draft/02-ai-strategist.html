@@ -1,0 +1,403 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Consult the Oracle - Digital Séance</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Hanken+Grotesk:ital,wght@0,400;0,700;1,400&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected from Style Guidance -->
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-high": "#2e2739",
+                "inverse-on-surface": "#342d40",
+                "tertiary": "#ddb7ff",
+                "tertiary-container": "#140029",
+                "outline": "#968e96",
+                "surface-container-highest": "#393144",
+                "surface": "#171021",
+                "on-primary-container": "#86738e",
+                "error": "#ffb4ab",
+                "on-primary": "#3a2a42",
+                "on-secondary-fixed": "#29132d",
+                "on-tertiary-container": "#985ed0",
+                "surface-container-lowest": "#110b1c",
+                "on-surface": "#eadef7",
+                "inverse-primary": "#6a5872",
+                "on-secondary-fixed-variant": "#583e5b",
+                "secondary-container": "#5a405d",
+                "on-secondary-container": "#cfaed1",
+                "tertiary-fixed": "#f0dbff",
+                "surface-container-low": "#1f182a",
+                "error-container": "#93000a",
+                "tertiary-fixed-dim": "#ddb7ff",
+                "primary-container": "#12051a",
+                "on-error-container": "#ffdad6",
+                "secondary-fixed-dim": "#debcdf",
+                "secondary": "#debcdf",
+                "on-secondary": "#402844",
+                "on-surface-variant": "#cdc4cc",
+                "surface-tint": "#d6bfdd",
+                "on-tertiary": "#4a0080",
+                "on-background": "#eadef7",
+                "on-error": "#690005",
+                "primary-fixed": "#f3dbfa",
+                "primary-fixed-dim": "#d6bfdd",
+                "surface-variant": "#393144",
+                "surface-container": "#231c2e",
+                "on-primary-fixed-variant": "#52415a",
+                "inverse-surface": "#eadef7",
+                "outline-variant": "#4b454c",
+                "surface-dim": "#171021",
+                "primary": "#d6bfdd",
+                "background": "#171021",
+                "on-primary-fixed": "#24162c",
+                "on-tertiary-fixed-variant": "#622599",
+                "surface-bright": "#3d3649",
+                "on-tertiary-fixed": "#2c0050",
+                "secondary-fixed": "#fbd7fc"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "unit": "8px",
+                "container-max": "1200px",
+                "gutter": "24px",
+                "margin-mobile": "16px",
+                "margin-desktop": "64px"
+        },
+        "fontFamily": {
+                "headline-lg-mobile": [
+                        "Bodoni Moda"
+                ],
+                "body-md": [
+                        "\"Source Serif 4\""
+                ],
+                "label-md": [
+                        "Metrophobic"
+                ],
+                "headline-lg": [
+                        "Bodoni Moda"
+                ],
+                "label-sm": [
+                        "Metrophobic"
+                ],
+                "headline-md": [
+                        "Bodoni Moda"
+                ],
+                "body-lg": [
+                        "\"Source Serif 4\""
+                ],
+                "headline-sm": [
+                        "Bodoni Moda"
+                ]
+        },
+        "fontSize": {
+                "headline-lg-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-sm": [
+                        "11px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "0.15em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-sm": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "500"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        /* Custom scrollbar for chat */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--tw-colors-outline-variant);
+            border-radius: 4px;
+        }
+        
+        /* Deep Mirror Background Effect */
+        .mirror-bg {
+            background: radial-gradient(circle at 50% 50%, rgba(28, 27, 27, 0.8) 0%, rgba(14, 14, 14, 1) 100%);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+        }
+
+        /* Violet Filigree Border Effects */
+        .violet-filigree {
+            border: 1px solid var(--tw-colors-primary-container);
+            position: relative;
+        }
+        .violet-filigree::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border: 1px solid var(--tw-colors-primary);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .arched-mirror {
+            border-top-left-radius: 50% 100px;
+            border-top-right-radius: 50% 100px;
+        }
+
+        /* Frosted Glass with Amethyst Glow */
+        .frosted-amethyst {
+            background: rgba(90, 64, 93, 0.2);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(214, 191, 221, 0.2);
+            box-shadow: 0 0 20px rgba(90, 64, 93, 0.2), inset 0 0 10px rgba(214, 191, 221, 0.1);
+        }
+
+        /* Polished Black Glass */
+        .polished-black {
+            background: linear-gradient(135deg, rgba(32, 31, 31, 0.9) 0%, rgba(14, 14, 14, 0.95) 100%);
+            border: 1px solid var(--tw-colors-outline-variant);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        /* Slow glow pulse for inputs */
+        @keyframes slow-pulse {
+            0% { box-shadow: 0 1px 0 0 var(--tw-colors-outline-variant); }
+            50% { box-shadow: 0 1px 15px 0 rgba(214, 191, 221, 0.4); border-color: var(--tw-colors-primary); }
+            100% { box-shadow: 0 1px 0 0 var(--tw-colors-outline-variant); }
+        }
+        .input-glow:focus-within {
+            animation: slow-pulse 3s infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden flex h-screen">
+<!-- JSON Anchor: SideNavBar (Main App Shell) -->
+<nav class="bg-surface-container-lowest/90 backdrop-blur-2xl fixed left-0 top-0 h-full w-64 border-r border-outline-variant shadow-2xl flex flex-col py-8 z-50 hidden md:flex">
+<div class="px-6 mb-12 flex flex-col gap-1 items-center text-center">
+<span class="font-headline-lg text-headline-lg text-primary uppercase tracking-widest">The Artist</span>
+<div class="w-12 h-px bg-primary/30 my-2"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-70 uppercase">Mirror Phase I</span>
+</div>
+<div class="flex flex-col w-full flex-1 gap-2 mt-8">
+<!-- Active Tab: Oracle -->
+<a class="flex items-center gap-4 bg-primary-container/30 text-primary border-r-2 border-primary px-6 py-4 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Oracle</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 hover:bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">flare</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Mirrors</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 hover:bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">library_music</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Vault</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 hover:bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Settings</span>
+</a>
+</div>
+<div class="px-6 mt-auto flex flex-col gap-4">
+<button class="w-full py-3 px-4 border border-primary/30 rounded text-primary font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary/10 transition-colors">Summon Oracle</button>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 hover:bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Workspace Area -->
+<main class="flex-1 flex flex-col md:flex-row md:ml-64 h-full relative mirror-bg">
+<!-- Secondary Sidebar: Saved Projects & Plans -->
+<aside class="hidden lg:flex flex-col w-80 border-r border-outline-variant bg-surface-container-lowest/60 backdrop-blur-md h-full z-10 p-6 overflow-y-auto">
+<div class="mb-8">
+<div class="flex items-center gap-4 mb-8">
+<div class="flex-1 h-px bg-gradient-to-r from-transparent to-primary/50"></div>
+<h2 class="font-label-sm text-label-sm text-primary uppercase tracking-widest text-center">Saved Strategies</h2>
+<div class="flex-1 h-px bg-gradient-to-l from-transparent to-primary/50"></div>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Project Card 1 -->
+<div class="relative group cursor-pointer">
+<div class="absolute inset-0 border border-primary/20 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="border-b border-outline-variant/50 pb-4 group-hover:border-primary/30 transition-colors">
+<div class="flex items-center justify-between mb-2">
+<span class="font-headline-md text-body-lg text-on-surface group-hover:text-primary transition-colors">Nocturnal EP Strategy</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant line-clamp-2 italic">Discussing the rollout timeline and visual aesthetic for the dark synthpop release.</p>
+<div class="mt-3 flex gap-2">
+<span class="font-label-sm text-[10px] text-primary tracking-widest uppercase">#RELEASE</span>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="relative group cursor-pointer">
+<div class="absolute inset-0 border border-primary/20 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="border-b border-outline-variant/50 pb-4 group-hover:border-primary/30 transition-colors">
+<div class="flex items-center justify-between mb-2">
+<span class="font-headline-md text-body-lg text-on-surface group-hover:text-primary transition-colors">Echoes - Lyric Ideation</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant line-clamp-2 italic">Exploring themes of isolation and digital memories for the chorus section.</p>
+<div class="mt-3 flex gap-2">
+<span class="font-label-sm text-[10px] text-primary tracking-widest uppercase">#SONGWRITING</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Chat Canvas -->
+<section class="flex-1 flex flex-col h-full relative z-10 p-6 md:p-12 overflow-hidden">
+<!-- Mobile Header (Visible only on small screens) -->
+<header class="md:hidden flex justify-between items-center w-full p-4 mb-4 border-b border-outline-variant bg-surface/80 backdrop-blur-xl">
+<span class="font-headline-md text-primary tracking-tighter">MIRROR ME</span>
+<button class="text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- The Arch Mirror Frame -->
+<div class="flex-1 flex flex-col arched-mirror violet-filigree bg-surface-container-lowest/80 backdrop-blur-sm overflow-hidden relative shadow-2xl">
+<!-- Chat Header -->
+<div class="pt-16 pb-8 px-8 flex flex-col items-center justify-center border-b border-outline-variant/30 bg-gradient-to-b from-surface-container-low/90 to-transparent relative z-20">
+<div class="w-8 h-px bg-primary/50 mb-4"></div>
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2 tracking-widest uppercase text-center">AI Strategist</h1>
+<p class="font-body-md text-body-md text-on-surface-variant text-center max-w-lg italic">Collaborate with the AI to develop your career roadmap and release strategy.</p>
+<div class="w-8 h-px bg-primary/50 mt-4"></div>
+</div>
+<!-- Messages Area -->
+<div class="flex-1 overflow-y-auto p-8 flex flex-col gap-10 scroll-smooth relative z-10" id="chat-container">
+<!-- Oracle Message (Initial) -->
+<div class="flex items-start gap-4 max-w-3xl">
+<div class="w-12 h-12 rounded-full border border-secondary/50 flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(90,64,93,0.5)] bg-surface-container">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="frosted-amethyst rounded-2xl rounded-tl-none p-6 text-on-surface relative">
+<div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-secondary/50"></div>
+<div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-secondary/50"></div>
+<p class="font-body-md text-body-md leading-relaxed text-on-surface">Welcome to your strategy session. We can begin by defining the sonic direction for your next release or focus on visual branding assets. How would you like to proceed?</p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex items-end justify-end gap-4 max-w-3xl self-end">
+<div class="polished-black rounded-2xl rounded-tr-none p-6 text-on-surface relative border border-primary/20">
+<div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-primary/50"></div>
+<div class="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-primary/50"></div>
+<p class="font-body-md text-body-md leading-relaxed text-primary-fixed-dim">I'm looking for a visual direction that is cold but high-end. Our demo tracks are industrial and heavy.</p>
+</div>
+</div>
+<!-- Oracle Message -->
+<div class="flex items-start gap-4 max-w-3xl">
+<div class="w-12 h-12 rounded-full border border-secondary/50 flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(90,64,93,0.5)] bg-surface-container">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="frosted-amethyst rounded-2xl rounded-tl-none p-6 text-on-surface relative">
+<div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-secondary/50"></div>
+<div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-secondary/50"></div>
+<p class="font-body-md text-body-md leading-relaxed mb-6 text-on-surface">Visual Strategy: High-contrast, minimalist aesthetics. Deep blacks punctuated by sharp, directional lighting to mirror the industrial sonic profile.</p>
+<div class="flex gap-4 mt-4">
+<span class="px-4 py-2 border border-secondary/30 bg-secondary-container/30 rounded font-label-sm text-xs text-secondary hover:border-secondary hover:bg-secondary/10 cursor-pointer transition-all duration-300 uppercase tracking-widest text-center shadow-[inset_0_0_10px_rgba(90,64,93,0)] hover:shadow-[inset_0_0_10px_rgba(90,64,93,0.5)]">Generate Moodboard</span>
+<span class="px-4 py-2 border border-secondary/30 bg-secondary-container/30 rounded font-label-sm text-xs text-secondary hover:border-secondary hover:bg-secondary/10 cursor-pointer transition-all duration-300 uppercase tracking-widest text-center shadow-[inset_0_0_10px_rgba(90,64,93,0)] hover:shadow-[inset_0_0_10px_rgba(90,64,93,0.5)]">Draft Creative Brief</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-8 pb-12 bg-gradient-to-t from-surface-container-lowest to-transparent relative z-20">
+<div class="max-w-4xl mx-auto relative group">
+<div class="absolute inset-0 bg-primary/5 rounded blur-xl transition-opacity opacity-0 group-focus-within:opacity-100 pointer-events-none"></div>
+<div class="relative flex items-end gap-4 polished-black p-2 pl-6 focus-within:border-primary/50 transition-colors shadow-2xl input-glow">
+<textarea class="flex-1 bg-transparent border-none text-primary-fixed-dim font-body-md focus:ring-0 resize-none py-4 placeholder:text-outline-variant max-h-32 overflow-y-auto italic" placeholder="Consult the oracle..." rows="1"></textarea>
+<div class="flex items-center gap-2 pb-2 pr-2">
+<button class="p-2 text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">attach_file</span>
+</button>
+<button class="relative overflow-hidden group/btn px-6 py-3 border border-primary/30 bg-transparent hover:bg-primary/10 transition-all duration-300 flex items-center justify-center gap-2">
+<div class="absolute inset-0 border border-primary/50 opacity-0 group-hover/btn:opacity-100 transition-opacity"></div>
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase relative z-10">Submit</span>
+<span class="material-symbols-outlined text-primary text-sm relative z-10" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Simple auto-resize for textarea
+        const tx = document.getElementsByTagName("textarea");
+        for (let i = 0; i < tx.length; i++) {
+          tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+          tx[i].addEventListener("input", OnInput, false);
+        }
+
+        function OnInput() {
+          this.style.height = "auto";
+          this.style.height = (this.scrollHeight) + "px";
+          // Scroll chat to bottom when typing pushes it up
+          const chat = document.getElementById('chat-container');
+          chat.scrollTop = chat.scrollHeight;
+        }
+    </script>
+</body></html>

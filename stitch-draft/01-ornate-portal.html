@@ -1,0 +1,370 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>The Mirror Hall - MIRROR ME</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Metrophobic:wght@400&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-high": "#2e2739",
+                "inverse-on-surface": "#342d40",
+                "tertiary": "#ddb7ff",
+                "tertiary-container": "#140029",
+                "outline": "#968e96",
+                "surface-container-highest": "#393144",
+                "surface": "#171021",
+                "on-primary-container": "#86738e",
+                "error": "#ffb4ab",
+                "on-primary": "#3a2a42",
+                "on-secondary-fixed": "#29132d",
+                "on-tertiary-container": "#985ed0",
+                "surface-container-lowest": "#110b1c",
+                "on-surface": "#eadef7",
+                "inverse-primary": "#6a5872",
+                "on-secondary-fixed-variant": "#583e5b",
+                "secondary-container": "#5a405d",
+                "on-secondary-container": "#cfaed1",
+                "tertiary-fixed": "#f0dbff",
+                "surface-container-low": "#1f182a",
+                "error-container": "#93000a",
+                "tertiary-fixed-dim": "#ddb7ff",
+                "primary-container": "#12051a",
+                "on-error-container": "#ffdad6",
+                "secondary-fixed-dim": "#debcdf",
+                "secondary": "#debcdf",
+                "on-secondary": "#402844",
+                "on-surface-variant": "#cdc4cc",
+                "surface-tint": "#d6bfdd",
+                "on-tertiary": "#4a0080",
+                "on-background": "#eadef7",
+                "on-error": "#690005",
+                "primary-fixed": "#f3dbfa",
+                "primary-fixed-dim": "#d6bfdd",
+                "surface-variant": "#393144",
+                "surface-container": "#231c2e",
+                "on-primary-fixed-variant": "#52415a",
+                "inverse-surface": "#eadef7",
+                "outline-variant": "#4b454c",
+                "surface-dim": "#171021",
+                "primary": "#d6bfdd",
+                "background": "#171021",
+                "on-primary-fixed": "#24162c",
+                "on-tertiary-fixed-variant": "#622599",
+                "surface-bright": "#3d3649",
+                "on-tertiary-fixed": "#2c0050",
+                "secondary-fixed": "#fbd7fc"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "unit": "8px",
+                "container-max": "1200px",
+                "gutter": "24px",
+                "margin-mobile": "16px",
+                "margin-desktop": "64px"
+        },
+        "fontFamily": {
+                "headline-lg-mobile": [
+                        "Bodoni Moda"
+                ],
+                "body-md": [
+                        "\"Source Serif 4\""
+                ],
+                "label-md": [
+                        "Metrophobic"
+                ],
+                "headline-lg": [
+                        "Bodoni Moda"
+                ],
+                "label-sm": [
+                        "Metrophobic"
+                ],
+                "headline-md": [
+                        "Bodoni Moda"
+                ],
+                "body-lg": [
+                        "\"Source Serif 4\""
+                ],
+                "headline-sm": [
+                        "Bodoni Moda"
+                ]
+        },
+        "fontSize": {
+                "headline-lg-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-sm": [
+                        "11px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "0.15em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-sm": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "500"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        
+        .etched-content {
+            text-shadow: 0 1px 1px rgba(255,255,255,0.4), 0 -1px 2px rgba(0,0,0,0.8);
+            color: rgba(220, 225, 240, 0.85);
+            mix-blend-mode: overlay;
+            opacity: 0.9;
+        }
+        
+        .mirror-glow {
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+        }
+
+.ornate-frame {
+    background: linear-gradient(135deg, #1f182a 0%, #110b1c 50%, #0a070c 100%);
+    border: 4px solid #342d40;
+    border-radius: 50% / 60% 60% 40% 40%;
+    box-shadow: 
+        inset 0 0 0 2px #52415a,
+        inset 0 0 15px 5px rgba(0,0,0,0.8),
+        0 20px 50px rgba(0,0,0,0.9),
+        0 0 30px rgba(52, 45, 64, 0.3);
+    padding: 24px;
+    position: relative;
+}
+.ornate-frame::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 2px solid #52415a;
+    border-radius: 50% / 60% 60% 40% 40%;
+    pointer-events: none;
+    opacity: 0.6;
+}
+/* Jewel accents */
+.ornate-frame::after {
+    content: '•';
+    color: #985ed0;
+    text-shadow: 0 0 10px #985ed0, 0 0 20px #985ed0;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    filter: drop-shadow(0 0 5px rgba(0,0,0,1));
+}
+.mirror-surface {
+    background: radial-gradient(circle at 50% 30%, #12051a 0%, #0a040f 40%, #050208 100%);
+    border-radius: 50% / 60% 60% 40% 40%;
+    box-shadow: 
+        inset 0 0 80px 20px rgba(0,0,0,0.95), 
+        inset 0 0 30px rgba(152, 94, 208, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+.mirror-surface::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 60%;
+    height: 40%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%);
+    filter: blur(20px);
+    pointer-events: none;
+}
+</style></head>
+<body class="bg-surface-container-lowest text-on-background min-h-screen flex flex-col antialiased relative selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Global Background Shader -->
+<!-- TopNavBar Component -->
+<header class="bg-surface-container-lowest/80 backdrop-blur-xl docked full-width top-0 sticky border-b border-white/5 shadow-[0_0_20px_rgba(0,0,0,0.5)] z-50 transition-all duration-700 ease-in-out">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-primary tracking-tighter hover:drop-shadow-[0_0_15px_rgba(214,191,221,0.4)] transition-all">MirrorMeMusic</div>
+<nav class="hidden md:flex items-center gap-12">
+<a class="text-primary border-b border-primary pb-1 font-label-sm text-label-sm tracking-widest uppercase hover:text-primary hover:drop-shadow-[0_0_8px_rgba(214,191,221,0.6)] transition-all duration-500" href="#">Portals</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-500 font-label-sm text-label-sm tracking-widest uppercase hover:drop-shadow-[0_0_8px_rgba(214,191,221,0.6)]" href="#">Archive</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-500 font-label-sm text-label-sm tracking-widest uppercase hover:drop-shadow-[0_0_8px_rgba(214,191,221,0.6)]" href="#">Almanac</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-primary hover:text-primary hover:drop-shadow-[0_0_8px_rgba(214,191,221,0.6)] transition-all duration-500">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow relative z-10 flex flex-col items-center justify-center py-24 md:py-32 px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-24 max-w-2xl mx-auto">
+<div class="w-full max-w-3xl mx-auto mb-6 overflow-visible">
+  <svg viewBox="0 0 800 180" class="w-full h-auto drop-shadow-[0_0_20px_rgba(214,191,221,0.2)]">
+    <defs>
+      <path id="header-arc" d="M 50,150 Q 400,20 750,150" fill="transparent"></path>
+    </defs>
+    <text class="fill-primary font-headline-lg" style="font-family: 'Bodoni Moda', serif; font-size: 56px; letter-spacing: -0.02em;">
+      <textPath href="#header-arc" startOffset="50%" text-anchor="middle">
+        Welcome to MirrorMeMusic
+      </textPath>
+    </text>
+  </svg>
+</div>
+
+</div>
+<!-- Portals Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 w-full max-w-[1400px] mx-auto">
+<!-- Mirror 1: The Artist -->
+<div class="group h-[540px] [perspective:1200px] w-full">
+<div class="relative h-full w-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.23,1,0.32,1)] preserve-3d group-hover:rotate-y-180">
+<!-- Front Face -->
+<div class="absolute inset-0 backface-hidden ornate-frame transition-all duration-500 group-hover:-translate-y-2">
+<div class="w-full h-full mirror-surface flex flex-col items-center justify-center p-8">
+<div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-screen z-0 pointer-events-none filter contrast-125 brightness-75" data-alt="A dark, textured surface resembling polished obsidian stone, reflecting a subtle, ethereal purple and cyan glow from an unseen light source. The aesthetic is mystical, minimalist, and cinematic, fitting a digital seance theme. Soft, atmospheric lighting catches micro-imperfections in the dark, glassy surface." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDM9bFCt4aGPaRO6X3LDKFFDiZFpbP6MiZY1MfwbJAHXE_lwMaPrw2kbqim7mSgR-Rvx708GWQpqDYDNj3RqlYHzrsWG47j4Pmeo8D5ptRYWIpg_LKUB5rHsp_DA0oVj1ExASrpztwF_5TtgCkAAlk28fmftrVFrK8wFnKmZN8_bNZwHJVTczxHqy78eq4L6P6jNEcx-aFetvETFR2e4vXJh9x-xNv5dBn_6426pBqRl2EnoUB7lCbnnr8KwdoYy-yVptY9mHY7_6I'); opacity: 0.2; mix-blend-mode: screen;"></div>
+<div class="relative z-10 flex flex-col items-center etched-content mirror-glow">
+
+<h2 class="font-headline-md text-headline-md tracking-tighter mb-2">Artist Profile</h2>
+<div class="h-px w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent my-4"></div>
+<p class="font-label-sm text-label-sm tracking-widest uppercase mt-2">Approach</p>
+</div>
+</div>
+</div>
+<!-- Back Face -->
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-[#110b1c]/95 backdrop-blur-2xl border-2 border-[#1f182a] flex flex-col items-center justify-center p-10 text-center shadow-[inset_0_0_80px_rgba(0,0,0,0.8)] overflow-hidden rounded-[50%_/_60%_60%_40%_40%]">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-tertiary opacity-50"></div>
+<span class="material-symbols-outlined text-[32px] text-tertiary/50 mb-6 group-hover:drop-shadow-[0_0_25px_rgba(221,183,255,0.7)]">info</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-6">About You</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Manage your professional identity and portfolio.</p>
+</div>
+</div>
+</div>
+<!-- Mirror 2: The Archive -->
+<div class="group h-[540px] [perspective:1200px] w-full mt-0 md:mt-16">
+<div class="relative h-full w-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.23,1,0.32,1)] preserve-3d group-hover:rotate-y-180">
+<!-- Front Face -->
+<div class="absolute inset-0 backface-hidden ornate-frame transition-all duration-500 group-hover:-translate-y-2">
+<div class="w-full h-full mirror-surface flex flex-col items-center justify-center p-8">
+<div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-screen z-0 pointer-events-none filter contrast-125 brightness-75" data-alt="Abstract digital art depicting soundwaves crystallizing into glass shards within a deep, dark void. The color palette relies on profound blacks, highlighted by sharp, luminescent cyan and soft lavender edges. The mood is enigmatic and ancient, serving as a textured backdrop for an archival artifact." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAqkcXZJFVjhs2INJSi9wAYvUjXB9OYpX8nQDY6eWkSl7JlgbeOINOmBOvVNgSNXNOGfCsQXe8KUZk7-0LvE-xARgNm6aCPlDJW8nrXWoVFkL9RgSS-nUgdBidWjhmWOpI8zJ75R-vLl4q42b_gOFZSXdyJvnoZ7tgd-7B-ThYZdd3hbppzJSjdOwDT8SUtOnVHpxSq8AIrrC1AX90b52GZdFYJa5eis5MDZHnvrGRzTz4Rd2ngGO6olAXxVgMGUTZUaQ3bmhpZJvw'); opacity: 0.2; mix-blend-mode: screen;"></div>
+<div class="relative z-10 flex flex-col items-center etched-content mirror-glow">
+
+<h2 class="font-headline-md text-headline-md tracking-tighter mb-2">Project Archive</h2>
+<div class="h-px w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent my-4"></div>
+<p class="font-label-sm text-label-sm tracking-widest uppercase mt-2">Discover</p>
+</div>
+</div>
+</div>
+<!-- Back Face -->
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-[#110b1c]/95 backdrop-blur-2xl border-2 border-[#1f182a] flex flex-col items-center justify-center p-10 text-center shadow-[inset_0_0_80px_rgba(0,0,0,0.8)] overflow-hidden rounded-[50%_/_60%_60%_40%_40%]">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-tertiary opacity-50"></div>
+<span class="material-symbols-outlined text-[32px] text-tertiary/50 mb-4 group-hover:drop-shadow-[0_0_25px_rgba(221,183,255,0.7)]">album</span>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">'MIRROR'</h3>
+<p class="font-label-sm text-label-sm text-tertiary tracking-widest uppercase mb-6">The Mixtape</p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-8">Explore your catalog and released works.</p>
+<button class="px-6 py-3 border border-tertiary/50 rounded-full font-label-sm text-label-sm text-primary hover:bg-tertiary/10 hover:shadow-[0_0_15px_rgba(221,183,255,0.3)] transition-all duration-300">Explore Artifact</button>
+</div>
+</div>
+</div>
+<!-- Mirror 3: The Oracle -->
+<div class="group h-[540px] [perspective:1200px] w-full">
+<div class="relative h-full w-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.23,1,0.32,1)] preserve-3d group-hover:rotate-y-180">
+<!-- Front Face -->
+<div class="absolute inset-0 backface-hidden ornate-frame transition-all duration-500 group-hover:-translate-y-2">
+<div class="w-full h-full mirror-surface flex flex-col items-center justify-center p-8">
+<div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-screen z-0 pointer-events-none filter contrast-125 brightness-75" data-alt="A swirling, smoky nebula trapped within a sleek, minimalist geometric frame, viewed through a dark, smoked glass filter. The ethereal smoke emits a faint, bioluminescent purple light, simulating an artificial intelligence core or a mystical oracle's scrying surface. The overall tone is sophisticated, mysterious, and high-contrast." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4jsno8niO28nInAaYFquCgooFwYr-IqkGXbwcHQjn_eWvrx8Zpd_gsZ4PSqdBRbodIK6gKwIqYn1r3tyH8zsLYbx01rlNrr4fjXtjcNlxEQDk70VFfDCH_MsVjp5xZ7qSbHQq8Ji895qSykUvIJDXWDma4DPJpwOwJiJ5cweaEYwRHszNHxKfu9Fx91IKAHlZvxQXZEKOgzYJXdTkcqbhjfr7X0UL3H8CScSJJyI2ocCSbBVWUntc-BTStbyVqLaFOxXDSxTYUQM'); opacity: 0.2; mix-blend-mode: screen;"></div>
+<div class="relative z-10 flex flex-col items-center etched-content mirror-glow">
+
+<h2 class="font-headline-md text-headline-md tracking-tighter mb-2">Strategic AI</h2>
+<div class="h-px w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent my-4"></div>
+<p class="font-label-sm text-label-sm tracking-widest uppercase mt-2">Summon</p>
+</div>
+</div>
+</div>
+<!-- Back Face -->
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-[#110b1c]/95 backdrop-blur-2xl border-2 border-[#1f182a] flex flex-col items-center justify-center p-10 text-center shadow-[inset_0_0_80px_rgba(0,0,0,0.8)] overflow-hidden rounded-[50%_/_60%_60%_40%_40%]">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-tertiary opacity-50"></div>
+<span class="material-symbols-outlined text-[32px] text-tertiary/50 mb-6 group-hover:drop-shadow-[0_0_25px_rgba(221,183,255,0.7)]">psychiatry</span>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-6">Digital Séace</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-8">Consult the AI strategist for career and release planning.</p>
+<button class="relative group/btn overflow-hidden px-8 py-4 border border-tertiary rounded-full font-label-sm text-label-sm text-primary transition-all duration-300 hover:shadow-[0_0_20px_rgba(221,183,255,0.4)] bg-transparent">
+<span class="absolute inset-0 w-full h-full bg-tertiary/10 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out"></span>
+<span class="relative z-10 flex items-center gap-2">Initiate <span class="material-symbols-outlined text-[16px] group-hover:drop-shadow-[0_0_25px_rgba(221,183,255,0.7)]">arrow_forward</span></span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container-lowest w-full py-12 border-t border-white/5 relative z-10">
+<div class="flex flex-col items-center gap-6 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="font-headline-sm text-primary tracking-tighter opacity-80 hover:opacity-100 transition-opacity">MirrorMeMusic</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors uppercase tracking-widest" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors uppercase tracking-widest" href="#">Contact</a>
+</div>
+<div class="font-label-sm text-label-sm text-outline mt-8 uppercase tracking-widest opacity-50">© 2024 MirrorMeMusic — DIGITAL SÉANCE</div>
+</div>
+</footer>
+
+
+
+
+</body></html>

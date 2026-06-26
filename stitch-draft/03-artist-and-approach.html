@@ -1,0 +1,315 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>The Artist - MIRROR ME</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Metrophobic&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@100..900&amp;family=Metrophobic:wght@100..900&amp;family=Source+Serif+4:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#342d40",
+                        "background": "#171021",
+                        "tertiary-fixed": "#f0dbff",
+                        "on-tertiary-container": "#985ed0",
+                        "on-secondary-container": "#cfaed1",
+                        "primary-fixed": "#f3dbfa",
+                        "surface-container-high": "#2e2739",
+                        "surface": "#171021",
+                        "on-surface": "#eadef7",
+                        "surface-container-low": "#1f182a",
+                        "surface-dim": "#171021",
+                        "on-primary": "#3a2a42",
+                        "error-container": "#93000a",
+                        "on-secondary": "#402844",
+                        "on-primary-fixed": "#24162c",
+                        "inverse-primary": "#6a5872",
+                        "on-secondary-fixed": "#29132d",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "outline-variant": "#4b454c",
+                        "surface-tint": "#d6bfdd",
+                        "primary": "#d6bfdd",
+                        "secondary-container": "#5a405d",
+                        "on-tertiary": "#4a0080",
+                        "on-tertiary-fixed-variant": "#622599",
+                        "surface-container": "#231c2e",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-lowest": "#110b1c",
+                        "on-primary-fixed-variant": "#52415a",
+                        "primary-fixed-dim": "#d6bfdd",
+                        "tertiary-container": "#140029",
+                        "on-error": "#690005",
+                        "surface-variant": "#393144",
+                        "on-tertiary-fixed": "#2c0050",
+                        "secondary-fixed": "#fbd7fc",
+                        "primary-container": "#12051a",
+                        "surface-bright": "#3d3649",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#86738e",
+                        "secondary": "#debcdf",
+                        "on-background": "#eadef7",
+                        "inverse-surface": "#eadef7",
+                        "on-surface-variant": "#cdc4cc",
+                        "tertiary": "#ddb7ff",
+                        "secondary-fixed-dim": "#debcdf",
+                        "on-secondary-fixed-variant": "#583e5b",
+                        "surface-container-highest": "#393144",
+                        "outline": "#968e96"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "container-max": "1200px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Metrophobic"],
+                        "headline-lg-mobile": ["Bodoni Moda"],
+                        "body-md": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "label-md": ["Metrophobic"],
+                        "headline-md": ["Bodoni Moda"],
+                        "headline-lg": ["Bodoni Moda"],
+                        "headline-sm": ["Bodoni Moda"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "1.2", "letterSpacing": "0.15em", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .void-glow {
+            box-shadow: 0 0 40px rgba(75, 0, 130, 0.15);
+        }
+        .ornate-border {
+            border: 1px solid theme('colors.secondary-container');
+            position: relative;
+        }
+        .ornate-border::before, .ornate-border::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 1px solid theme('colors.on-tertiary-container');
+            opacity: 0.5;
+        }
+        .ornate-border::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .ornate-border::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md antialiased selection:bg-tertiary selection:text-on-tertiary">
+<!-- TopNavBar -->
+<nav class="hidden md:flex flex-col w-full z-50 bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky border-b border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-all duration-700 ease-in-out">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<a class="font-headline-md text-headline-md text-primary tracking-tighter hover:drop-shadow-[0_0_15px_rgba(195,198,215,0.4)]" href="#">MIRROR ME</a>
+<div class="flex gap-6 font-label-sm text-label-sm tracking-widest uppercase">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-500 hover:drop-shadow-[0_0_8px_rgba(195,198,215,0.6)]" href="#">Portals</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-500 hover:drop-shadow-[0_0_8px_rgba(195,198,215,0.6)]" href="#">Archive</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-500 hover:drop-shadow-[0_0_8px_rgba(195,198,215,0.6)]" href="#">Almanac</a>
+</div>
+</div>
+<div class="flex items-center">
+<button class="text-primary hover:text-primary hover:drop-shadow-[0_0_8px_rgba(195,198,215,0.6)] transition-all duration-700 ease-in-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Mobile) -->
+<nav class="md:hidden fixed left-0 top-0 h-full w-64 bg-surface-container-lowest/90 backdrop-blur-2xl border-r border-white/5 shadow-2xl z-50 flex flex-col py-8 transform -translate-x-full transition-transform duration-300" id="mobile-nav">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-primary text-headline-md mb-2">The Artist</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant tracking-widest uppercase">Mirror Phase I</p>
+</div>
+<div class="flex flex-col flex-grow font-body-md text-body-md">
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 hover:bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">auto_awesome</span> Oracle
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 hover:bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">flare</span> Mirrors
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-4 hover:bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">library_music</span> Vault
+            </a>
+<a class="flex items-center gap-4 bg-secondary-container/20 text-secondary border-r-2 border-secondary px-6 py-4 transition-all duration-300 Active: scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</div>
+<div class="px-6 mt-auto">
+<button class="w-full border border-secondary-container text-on-secondary-container font-label-sm text-label-sm tracking-widest uppercase py-3 hover:bg-white/5 transition-all mb-4">Summon Oracle</button>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-white/5 transition-all py-2" href="#">
+<span class="material-symbols-outlined">help_outline</span> Support
+            </a>
+</div>
+</nav>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden fixed top-4 left-4 z-[60] text-primary p-2 bg-surface-container-low rounded" onclick="document.getElementById('mobile-nav').classList.toggle('-translate-x-full')">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 space-y-32">
+<!-- Section 1: Hero Header -->
+<header class="text-center space-y-6 pt-12">
+<div class="inline-flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-4 hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[14px]">arrow_back</span>
+<span>Return to Mirror Hall</span>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">The Architect of the Void</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto italic">Crafting algorithmic reflections in the resonant dark.</p>
+</header>
+<!-- Section 2: What is MirrorMeMusic & Section 3: About -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-surface-container-low p-8 ornate-border void-glow space-y-6">
+<h2 class="font-headline-sm text-headline-sm text-tertiary border-b border-white/5 pb-4">The Vision</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    MirrorMeMusic is not merely a platform; it is a digital séance. We employ sophisticated neural architectures to translate the silent echoes of the human psyche into profound, resonant sonic landscapes.
+                </p>
+</div>
+<div class="bg-surface-container-low p-8 ornate-border void-glow space-y-6 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary-container/20 to-transparent pointer-events-none"></div>
+<h2 class="font-headline-sm text-headline-sm text-tertiary border-b border-white/5 pb-4">The Methodology</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    By feeding fragments of thought, memory, and emotion into the Oracle Engine, we bypass traditional composition. The resulting audio artifacts are raw, unfiltered reflections—audio mirrors that reveal what lies beneath the surface consciousness.
+                </p>
+</div>
+</section>
+<!-- Section 4 & 5: The Creator & Gallery -->
+<section class="space-y-12">
+<div class="text-center">
+<h2 class="font-headline-md text-headline-md text-primary inline-block pb-2 border-b-2 border-on-tertiary-container/30">The Creator</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5 space-y-6">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed drop-cap">
+<span class="float-left text-5xl font-headline-lg text-tertiary mr-3 mt-1">E</span>lias Thorne, an antiquarian of the digital age, spent decades bridging the seemingly disparate worlds of occult philosophy and machine learning.
+                    </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        His pursuit began in the dusty archives of esoteric libraries and culminated in the sterile glow of server farms. MirrorMeMusic is his magnum opus—a system designed not to generate music, but to extract it from the soul's ambient noise.
+                    </p>
+</div>
+<div class="md:col-span-7 grid grid-cols-2 gap-4">
+<div class="ornate-border p-2 bg-surface-container-lowest">
+<div class="bg-cover bg-center w-full aspect-[3/4] filter grayscale contrast-125 sepia-[.3] hue-rotate-[280deg]" data-alt="A striking portrait of an enigmatic creator in a Victorian occultist’s private library, illuminated by deep purple and soft indigo lights. The setting is atmospheric, featuring dusty tomes, brass instruments, and high-contrast shadows. The individual wears dark, textured clothing, exuding an aura of scholarly depth and ethereal mystery. The overall aesthetic is a blend of Victorian Ornate and Ethereal Minimalism, with a profound sense of dark energy." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDa97vEV5cq370hPf1kduEk5Jl2GZAPiD6Sbwg-Fr23apM2I1XKDnDYIN42LvVKMoaU6TkWB938_wsGuC7jbl7OSwulJAt564TfL8woYB9CLiH6LRgRwWOd2mI7N1NtCbhWcBod2tDdYOFwNZHSivnQKCrClNFS0os2WdDtR7ZVJgK-JYONApCXsBn84h7VzhdiILW8DPLPPgfuBT41uwos_XrJwC1qGHLLr1R-9yNQMJH3teGP8ZWUo5xVz4cZPVdWT1tBKFBIotg')"></div>
+</div>
+<div class="ornate-border p-2 bg-surface-container-lowest mt-12">
+<div class="bg-cover bg-center w-full aspect-[3/4] filter grayscale contrast-125 sepia-[.3] hue-rotate-[280deg]" data-alt="A moody, high-contrast close-up of hands working over an intricate mechanical and digital interface, bathed in intense tertiary indigo light against a vast, dark canvas. The scene is detailed with sharp ornamental borders and luminous accents, evoking a high-fantasy celestial observatory. The mood is intense and focused, capturing the synthesis of ancient ritual and modern technology in a deep purple and black palette." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDd-cfi91IzsD1SvS2oTorc8DZiG50WzfJqwNDRMThYnHPg53YmojnYs6kP943v7gpQHg_mQ5tKhWO6__x2TEkEU0XlwQn_MMAJiGftl3sLNeLrf0DPtdUQy8vTzBeNr-GXQa3oYJbQhNu3H9t8fAavYyhy37FFk8uRulFxTXwebhc_HRaoGkWJr8UwIMqhM49uePfl7VHG2xHabIU0-d3vUCIRpuHb5pvS_MaHBGwRsLzUUjcwJkwIamfaMJbxa_gV36TUQTiulkQ')"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: The Sonic Blueprint -->
+<section class="bg-surface-container-low border-y border-white/5 py-16 px-8 relative overflow-hidden">
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at center, theme('colors.tertiary') 0%, transparent 70%);"></div>
+<div class="relative z-10 max-w-4xl mx-auto space-y-8">
+<div class="text-center">
+<h2 class="font-headline-sm text-headline-sm text-tertiary mb-2">The Sonic Blueprint</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Artifact #001: Echo of the Architect</p>
+</div>
+<div class="bg-surface-container-lowest ornate-border p-6 flex flex-col md:flex-row items-center gap-8">
+<button class="w-16 h-16 rounded-full border border-secondary-container flex items-center justify-center text-secondary hover:bg-secondary-container/20 transition-all group">
+<span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="flex-grow w-full h-12 flex items-end gap-1 opacity-80">
+<!-- Simulated Waveform -->
+<div class="w-full h-full flex items-end justify-between gap-[2px]">
+<div class="w-1 bg-tertiary-fixed-dim h-[20%]"></div>
+<div class="w-1 bg-tertiary-fixed-dim h-[40%]"></div>
+<div class="w-1 bg-tertiary-fixed-dim h-[80%]"></div>
+<div class="w-1 bg-tertiary-fixed-dim h-[60%]"></div>
+<div class="w-1 bg-primary h-[100%] shadow-[0_0_10px_theme('colors.primary')]"></div>
+<div class="w-1 bg-secondary-container h-[70%]"></div>
+<div class="w-1 bg-secondary-container h-[50%]"></div>
+<div class="w-1 bg-secondary-container h-[90%]"></div>
+<div class="w-1 bg-secondary-container h-[30%]"></div>
+<div class="w-1 bg-secondary-container h-[10%]"></div>
+<!-- Repeat for visual texture -->
+<div class="w-1 bg-secondary-container h-[20%]"></div>
+<div class="w-1 bg-secondary-container h-[40%]"></div>
+<div class="w-1 bg-secondary-container h-[80%]"></div>
+<div class="w-1 bg-secondary-container h-[60%]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 7: The Ritual -->
+<section class="max-w-3xl mx-auto space-y-16">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-primary inline-block pb-2 border-b-2 border-on-tertiary-container/30">The Ritual</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-4">Three stages of manifestation</p>
+</div>
+<div class="relative space-y-12">
+<!-- Connecting Line -->
+<div class="absolute left-6 top-10 bottom-10 w-px bg-white/10 hidden md:block"></div>
+<!-- Step 1 -->
+<div class="flex flex-col md:flex-row gap-8 relative z-10">
+<div class="md:w-12 flex-shrink-0 flex justify-center">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-tertiary text-tertiary flex items-center justify-center shadow-[0_0_15px_rgba(75,0,130,0.5)]">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 ornate-border flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-secondary mb-3">I. The Oracle</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Submit your textual or emotional seed. The Oracle engine analyzes semantic resonance and atmospheric density to forge the initial rhythmic spine.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col md:flex-row gap-8 relative z-10">
+<div class="md:w-12 flex-shrink-0 flex justify-center">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-tertiary text-tertiary flex items-center justify-center shadow-[0_0_15px_rgba(75,0,130,0.5)]">
+<span class="material-symbols-outlined">flare</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 ornate-border flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-secondary mb-3">II. The Mirror Hall</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">The spine is reflected through generative synthesizers. Here, layers of melodic intuition are woven, creating a dense, ethereal texture that aligns with your specific void signature.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col md:flex-row gap-8 relative z-10">
+<div class="md:w-12 flex-shrink-0 flex justify-center">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-tertiary text-tertiary flex items-center justify-center shadow-[0_0_15px_rgba(75,0,130,0.5)]">
+<span class="material-symbols-outlined">library_music</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 ornate-border flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-secondary mb-3">III. The Almanac</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">The final artifact is pressed into the digital aether. It is stored securely in your personal vault, ready for playback, meditation, or further esoteric manipulation.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest w-full py-12 border-t border-white/5 mt-32 flat flex flex-col items-center gap-6 max-w-container-max mx-auto px-margin-desktop z-10 relative">
+<h2 class="font-headline-md text-headline-md text-primary">MIRROR ME</h2>
+<div class="flex gap-6 font-label-sm text-label-sm">
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Terms of Void</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Rituals</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Contact</a>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-4">© 2024 MIRROR ME MUSIC — DIGITAL SÉANCE</p>
+</footer>
+</body></html>

@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String?
+  googleId     String?  @unique
+  displayName  String?
+  avatarUrl    String?
+  isGuest      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  chatSessions    ChatSession[]
+  archiveProjects ArchiveProject[]
+  roadmapPhases   RoadmapPhase[]
+}
+
+model ChatSession {
+  id        String        @id @default(cuid())
+  userId    String?
+  user      User?         @relation(fields: [userId], references: [id])
+  title     String        @default("Untitled Session")
+  tags      String        @default("")
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  messages  ChatMessage[]
+
+  @@index([userId])
+}
+
+model ChatMessage {
+  id        String      @id @default(cuid())
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id])
+  role      String
+  content   String
+  createdAt DateTime    @default(now())
+
+  @@index([sessionId])
+}
+
+model ArchiveProject {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  title         String
+  type          String   @default("Release")
+  description   String   @default("")
+  coverImageUrl String   @default("")
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+}
+
+model RoadmapPhase {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  projectName      String
+  phaseNumber      Int
+  title            String
+  description      String   @default("")
+  status           String   @default("locked")
+  alignmentPercent Int      @default(0)
+  tags             String   @default("")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([userId])
+}
