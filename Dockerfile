@@ -20,9 +20,16 @@ RUN echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME
 
 RUN npm install -g @anthropic-ai/claude-code
 
-USER $USERNAME
 WORKDIR /workspace
+
+COPY . .
+
+RUN npm install
+
+RUN npm run build
+
+USER $USERNAME
 
 ENV SHELL=/bin/bash
 
-CMD ["bash"]
+CMD ["npm", "start"]
