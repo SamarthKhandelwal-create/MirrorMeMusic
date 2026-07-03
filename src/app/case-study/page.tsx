@@ -39,7 +39,7 @@ export default async function CaseStudyPage() {
             />
           ) : (
             <div className="max-w-xl mx-auto text-center bronze-filigree-border space-y-6">
-              <h2 className="font-headline-lg text-headline-lg text-primary italic">Your Library Awaits</h2>
+              <h2 className="font-headline-lg text-headline-lg text-primary italic">Start Your Library</h2>
               <p className="font-body-lg text-body-lg text-on-surface-variant">
                 Sign in to catalog your releases and track your library.
               </p>
@@ -47,7 +47,7 @@ export default async function CaseStudyPage() {
                 href="/signup"
                 className="inline-block px-6 py-3 border border-primary/50 rounded-full font-label-sm text-label-sm text-primary hover:bg-primary/10 transition-all duration-300 press-scale"
               >
-                Begin the Ritual
+                Sign Up
               </Link>
             </div>
           )}

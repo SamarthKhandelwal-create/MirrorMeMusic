@@ -232,7 +232,7 @@ export function StrategistChat({
                     </span>
                   </div>
                   <div className="frosted-amethyst rounded-2xl rounded-tl-none p-6 text-on-surface-variant italic">
-                    The AI Strategist is reflecting…
+                    The AI Strategist is thinking…
                   </div>
                 </div>
               )}

@@ -4,7 +4,7 @@ import { GuestButton } from "@/components/GuestButton";
 
 const NAV_LINKS = [
   { label: "About", href: "/about" },
-  { label: "Portals", href: "/" },
+  { label: "Home", href: "/" },
   { label: "Library", href: "/case-study" },
   { label: "AI Strategist", href: "/roadmap" },
 ];

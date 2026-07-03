@@ -1,6 +1,9 @@
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { LobbyMusic } from "@/components/LobbyMusic";
 import { getCurrentUser } from "@/lib/auth";
 
 const PORTALS = [
@@ -25,29 +28,31 @@ const PORTALS = [
     backCopy: "Explore your catalog and released works.",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAqkcXZJFVjhs2INJSi9wAYvUjXB9OYpX8nQDY6eWkSl7JlgbeOINOmBOvVNgSNXNOGfCsQXe8KUZk7-0LvE-xARgNm6aCPlDJW8nrXWoVFkL9RgSS-nUgdBidWjhmWOpI8zJ75R-vLl4q42b_gOFZSXdyJvnoZ7tgd-7B-ThYZdd3hbppzJSjdOwDT8SUtOnVHpxSq8AIrrC1AX90b52GZdFYJa5eis5MDZHnvrGRzTz4Rd2ngGO6olAXxVgMGUTZUaQ3bmhpZJvw",
-    cta: "Explore Artifact",
+    cta: "Explore",
     requiresAuth: true,
   },
   {
     title: "Strategic AI",
-    subtitle: "Summon",
+    subtitle: "Open",
     href: "/strategist",
     icon: "psychiatry",
     backTitle: "AI Strategist",
-    backCopy: "Consult the AI strategist for career and release planning.",
+    backCopy: "Chat with the AI Strategist for career and release planning.",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuB4jsno8niO28nInAaYFquCgooFwYr-IqkGXbwcHQjn_eWvrx8Zpd_gsZ4PSqdBRbodIK6gKwIqYn1r3tyH8zsLYbx01rlNrr4fjXtjcNlxEQDk70VFfDCH_MsVjp5xZ7qSbHQq8Ji895qSykUvIJDXWDma4DPJpwOwJiJ5cweaEYwRHszNHxKfu9Fx91IKAHlZvxQXZEKOgzYJXdTkcqbhjfr7X0UL3H8CScSJJyI2ocCSbBVWUntc-BTStbyVqLaFOxXDSxTYUQM",
-    cta: "Initiate",
+    cta: "Open",
     requiresAuth: true,
   },
 ];
 
 export default async function Home() {
   const user = await getCurrentUser();
+  const hasLobbyMusic = fs.existsSync(path.join(process.cwd(), "public", "audio", "lobby.mp3"));
 
   return (
     <div className="flex flex-col flex-1">
-      <SiteHeader active="Portals" user={user} />
+      <SiteHeader active="Home" user={user} />
+      {hasLobbyMusic && <LobbyMusic />}
       <main className="flex-grow relative z-10 flex flex-col items-center justify-center py-24 md:py-32 px-4 md:px-16">
         <div className="text-center mb-24 max-w-7xl mx-auto">
           <div className="w-full max-w-7xl mx-auto mb-6 overflow-visible animate-fade-up">
@@ -69,7 +74,7 @@ export default async function Home() {
             <p className="font-body-md text-body-md text-on-surface-variant italic animate-fade-up-delay-1">
               An AI-guided platform for independent artists.{" "}
               <Link href="/signup" className="text-primary hover:underline transition-colors duration-300">
-                Begin the ritual
+                Sign up
               </Link>{" "}
               to unlock your library.
             </p>

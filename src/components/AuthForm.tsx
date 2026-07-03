@@ -152,7 +152,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
         className="relative overflow-hidden px-8 py-4 border border-primary/30 bg-transparent hover:bg-primary/10 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 press-scale"
       >
         <span className="font-label-sm text-label-sm text-primary tracking-widest uppercase">
-          {loading ? "Please wait…" : mode === "login" ? "Enter the Mirror" : "Begin the Ritual"}
+          {loading ? "Please wait…" : mode === "login" ? "Sign In" : "Sign Up"}
         </span>
       </button>
       </form>

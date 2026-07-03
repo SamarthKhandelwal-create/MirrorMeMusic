@@ -16,7 +16,7 @@ export default async function SignupPage() {
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-24 gap-10">
         <div className="text-center space-y-3 animate-fade-up">
           <h1 className="font-headline-lg text-headline-lg text-primary tracking-tighter">
-            Begin the Ritual
+            Create Your Account
           </h1>
           <p className="font-body-md text-body-md text-on-surface-variant italic">
             Create your library and start your first session with the AI Strategist.
@@ -28,7 +28,7 @@ export default async function SignupPage() {
           </div>
         </Suspense>
         <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest animate-fade-up-delay-2">
-          Already initiated?{" "}
+          Already have an account?{" "}
           <Link href="/login" className="text-primary hover:underline transition-colors duration-300">
             Sign in
           </Link>

@@ -50,7 +50,7 @@ export default async function RoadmapPage() {
           </div>
         ) : (
           <div className="max-w-xl mx-auto text-center etched-glass rounded-xl p-10 space-y-6 animate-fade-up-delay-1">
-            <h2 className="font-headline-lg text-headline-lg text-primary">Your Roadmap Awaits</h2>
+            <h2 className="font-headline-lg text-headline-lg text-primary">Start Your Roadmap</h2>
             <p className="font-body-lg text-body-lg text-on-surface-variant">
               Sign in to let the AI Strategist draft a release strategy for your next project.
             </p>

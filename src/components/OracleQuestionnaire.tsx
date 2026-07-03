@@ -253,7 +253,7 @@ export function OracleQuestionnaire({
             disabled={submitting || !allAnswered}
             className="px-6 py-3 border border-primary/50 rounded-full font-label-sm text-label-sm text-primary hover:bg-primary/10 transition-all duration-300 disabled:opacity-50 press-scale"
           >
-            {submitting ? "The AI Strategist is drafting…" : "Summon Roadmap"}
+            {submitting ? "The AI Strategist is drafting…" : "Generate Roadmap"}
           </button>
         ) : (
           <button
