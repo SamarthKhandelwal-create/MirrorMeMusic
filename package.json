@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "prisma migrate deploy && next start",
+    "build": "prisma migrate deploy && next build",
+    "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate"
   },
   "dependencies": {
     "@google/genai": "^2.10.0",
-    "@prisma/adapter-better-sqlite3": "^7.8.0",
+    "@prisma/adapter-pg": "^7.9.1",
     "@prisma/client": "^7.8.0",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
@@ -37,7 +37,6 @@
     "sharp@0.34.5": true,
     "unrs-resolver@1.12.2": true,
     "@google/genai@2.10.0": true,
-    "protobufjs@7.6.4": true,
-    "better-sqlite3@12.11.1": true
+    "protobufjs@7.6.4": true
   }
 }
