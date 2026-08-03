@@ -138,6 +138,47 @@ function ConceptBoard() {
   );
 }
 
+function TrackList({ tracks }: { tracks: MirrorSingle[] }) {
+  return (
+    <div className="max-w-3xl mx-auto space-y-6">
+      <div className="text-center">
+        <p className="font-label-sm text-label-sm text-tertiary uppercase tracking-[0.3em]">Tracklist</p>
+      </div>
+      <ol className="space-y-2">
+        {tracks.map((t) => (
+          <li
+            key={t.num}
+            className="flex items-center gap-4 px-5 py-4 transition-all duration-300 hover:translate-x-1"
+            style={{
+              background: `linear-gradient(90deg, ${t.accent}26 0%, ${t.accent}0d 45%, transparent 100%)`,
+              borderLeft: `3px solid ${t.accent}`,
+            }}
+          >
+            <span
+              className="font-label-sm text-label-sm tabular-nums w-8 shrink-0 opacity-80"
+              style={{ color: t.accent }}
+            >
+              {t.num}
+            </span>
+            <span
+              className="font-headline-sm text-[17px] leading-tight flex-1"
+              style={{ color: t.accent }}
+            >
+              {t.title}
+            </span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-55 hidden sm:block text-right">
+              {t.artifact}
+            </span>
+          </li>
+        ))}
+      </ol>
+      <p className="font-label-sm text-label-sm text-on-surface-variant text-center opacity-50 tracking-wide pt-2">
+        Interludes, skits, and monologues sit between these tracks in the full sequence.
+      </p>
+    </div>
+  );
+}
+
 function SingleCard({ single }: { single: MirrorSingle }) {
   const exists = publicFileExists(single.img);
   return (
@@ -288,22 +329,69 @@ export default async function AboutPage() {
 
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              MIRROR follows a boy who enters the mirrorverse at thirteen and returns seven years
-              later as a man. Each world is its own single — its own color, artifact, and lesson —
-              and every choice he makes shapes who he becomes. It&apos;s the concept mixtape that
-              inspired this platform: its name, its mirror motif, and its belief that every
-              artist&apos;s journey deserves a real story.
+              On his 13th birthday, a young, innocent Joey is pulled into his bathroom mirror by a
+              darker, future version of himself. He goes missing in the Mirrorverse for seven
+              years — the span of his teenage years — and eventually emerges as a changed adult.
+            </p>
+            <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              The project is written like a theatrical experience: songs, interludes, skits, and
+              monologues, many of them framed as therapy sessions that take place after he escapes
+              the Mirrorverse. Each world is its own track — its own color, artifact, and lesson —
+              and every choice he makes shapes who he becomes.
             </p>
             <p className="font-headline-sm text-headline-sm text-tertiary italic">
-              &ldquo;Make the right decision. Every world. Every choice. It all shapes the man
+              &ldquo;Make the right choice. Every world. Every choice. It all shapes the man
               you&apos;re destined to be.&rdquo;
             </p>
           </div>
+
+          <TrackList tracks={MIRROR_SINGLES} />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {MIRROR_SINGLES.map((single) => (
               <SingleCard key={single.num} single={single} />
             ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+            <div className="bg-surface-container-low p-6 ornate-border space-y-3">
+              <span className="material-symbols-outlined text-tertiary">groups</span>
+              <h3 className="font-headline-sm text-headline-sm text-primary">Who It&apos;s For</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Primarily teens and young adults, with a clean version so the story stays
+                accessible to everyone.
+              </p>
+            </div>
+            <div className="bg-surface-container-low p-6 ornate-border space-y-3">
+              <span className="material-symbols-outlined text-tertiary">campaign</span>
+              <h3 className="font-headline-sm text-headline-sm text-primary">The Rollout</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Social media campaigns, billboards, and symbolic mirror installations placed in
+                public spaces around the U.S.
+              </p>
+            </div>
+            <div className="bg-surface-container-low p-6 ornate-border space-y-3">
+              <span className="material-symbols-outlined text-tertiary">theater_comedy</span>
+              <h3 className="font-headline-sm text-headline-sm text-primary">The Tour</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                A North American theatre-style tour where the album is performed in sequence —
+                a live cinematic experience, closer to a Broadway play than a concert.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-surface-container-low border-y border-primary/20 py-12 px-8 text-center animate-fade-up-delay-4">
+          <div className="max-w-2xl mx-auto space-y-4">
+            <h2 className="font-headline-sm text-headline-sm text-tertiary">Created by Joey Koury</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Every song, storyline, and visual concept in <span className="italic text-primary">MIRROR</span>{" "}
+              was written and created 100% by me, alone. AI is used on this site to help artists
+              execute their own vision — the same way it&apos;s used by many other creators, like me.
+            </p>
+            <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              MirrorMeMusic.com is built on my passion project — <span className="italic text-primary">MIRROR</span>.
+            </p>
           </div>
         </section>
 

@@ -1,9 +1,8 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LobbyMusic } from "@/components/LobbyMusic";
+import { HomeMirror } from "@/components/HomeMirror";
 import { getCurrentUser } from "@/lib/auth";
 
 const PORTALS = [
@@ -47,31 +46,21 @@ const PORTALS = [
 
 export default async function Home() {
   const user = await getCurrentUser();
-  const hasLobbyMusic = fs.existsSync(path.join(process.cwd(), "public", "audio", "lobby.mp3"));
 
   return (
     <div className="flex flex-col flex-1">
       <SiteHeader active="Home" user={user} />
-      {hasLobbyMusic && <LobbyMusic />}
+      <LobbyMusic />
       <main className="flex-grow relative z-10 flex flex-col items-center justify-center py-24 md:py-32 px-4 md:px-16">
         <div className="text-center mb-24 max-w-7xl mx-auto">
-          <div className="w-full max-w-7xl mx-auto mb-6 overflow-visible animate-fade-up">
-            <svg viewBox="0 0 1400 300" className="w-full h-auto drop-shadow-[0_0_20px_rgba(214,191,221,0.2)]">
-              <defs>
-                <path id="header-arc" d="M 70,250 Q 700,60 1330,250" fill="transparent" />
-              </defs>
-              <text
-                className="fill-primary font-headline-lg"
-                style={{ fontFamily: "var(--font-bodoni-moda), serif", fontSize: "92px", letterSpacing: "-0.02em" }}
-              >
-                <textPath href="#header-arc" startOffset="50%" textAnchor="middle">
-                  Welcome to MirrorMeMusic
-                </textPath>
-              </text>
-            </svg>
+          <div className="mb-8 animate-fade-up">
+            <HomeMirror />
           </div>
+          <p className="font-body-md text-body-md text-on-surface-variant italic animate-fade-up-delay-1 max-w-xl mx-auto">
+            Face your reflection. Make the right choice.
+          </p>
           {!user && (
-            <p className="font-body-md text-body-md text-on-surface-variant italic animate-fade-up-delay-1">
+            <p className="font-body-md text-body-md text-on-surface-variant italic animate-fade-up-delay-2 mt-4">
               An AI-guided platform for independent artists.{" "}
               <Link href="/signup" className="text-primary hover:underline transition-colors duration-300">
                 Sign up

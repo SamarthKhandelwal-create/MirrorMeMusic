@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LogoutButton } from "@/components/LogoutButton";
 import { GuestButton } from "@/components/GuestButton";
+import { DiamondLogo } from "@/components/DiamondLogo";
 
 const NAV_LINKS = [
   { label: "About", href: "/about" },
@@ -26,8 +27,9 @@ export function SiteHeader({
       <div className="flex justify-between items-center w-full px-4 md:px-16 py-4 max-w-[1200px] mx-auto">
         <Link
           href="/"
-          className="font-headline-md text-headline-md text-primary tracking-tighter hover:drop-shadow-[0_0_15px_rgba(214,191,221,0.4)] transition-all"
+          className="flex items-center gap-3 font-headline-md text-headline-md text-primary tracking-tighter hover:drop-shadow-[0_0_15px_rgba(214,191,221,0.4)] transition-all"
         >
+          <DiamondLogo />
           MirrorMeMusic
         </Link>
         <nav className="hidden md:flex items-center gap-12">

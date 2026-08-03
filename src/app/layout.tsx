@@ -23,6 +23,7 @@ const metrophobic = Metrophobic({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.mirrormemusic.com"),
   title: "MirrorMeMusic",
   description:
     "MirrorMeMusic is an AI-guided platform for independent artists to develop release strategy, branding, and creative direction with the AI Strategist.",
