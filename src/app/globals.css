@@ -492,10 +492,14 @@ html {
   animation: mirror-float 7s ease-in-out infinite;
 }
 @keyframes crack-glint {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 0.92; }
+  0%, 100% { opacity: 0.72; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.035); }
 }
 .mirror-crack-anim {
+  /* fill-box + center so the scale pulses around the image itself rather than
+     the SVG origin, which would slide it off the glass. */
+  transform-box: fill-box;
+  transform-origin: center;
   animation: crack-glint 5.5s ease-in-out infinite;
 }
 

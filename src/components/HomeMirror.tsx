@@ -67,19 +67,21 @@ export function HomeMirror({ hasCrack = false }: { hasCrack?: boolean }) {
         <ellipse cx="250" cy="360" rx="181" ry="233" fill="url(#mirrorDark)" />
         <ellipse cx="250" cy="360" rx="181" ry="233" fill="url(#shimmerGrad)" className="mirror-shimmer-anim" />
 
-        {/* Crack overlay, clipped to the glass. `screen` drops the image's white
-            background so only the bright fracture lines show through. */}
+        {/* Light-burst overlay, clipped to the glass. crack.png carries a real
+            alpha channel (the source's flat backdrop was keyed out), so it
+            composites normally — no blend mode needed. The x/y are offset from
+            a naive centre because the burst sits at ~47%/36% of the source
+            image, not dead centre; this lands its core on the glass centre. */}
         {hasCrack && (
           <g clipPath="url(#glassClip)">
             <image
               href="/mirror/crack.png"
-              x="80"
-              y="215"
-              width="340"
-              height="290"
-              preserveAspectRatio="xMidYMid slice"
-              style={{ mixBlendMode: "screen" }}
-              opacity="0.72"
+              x="96"
+              y="278"
+              width="328"
+              height="231"
+              preserveAspectRatio="xMidYMid meet"
+              opacity="0.85"
               className="mirror-crack-anim"
             />
           </g>
