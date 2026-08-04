@@ -491,10 +491,18 @@ html {
 .mirror-float {
   animation: mirror-float 7s ease-in-out infinite;
 }
+@keyframes crack-glint {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.92; }
+}
+.mirror-crack-anim {
+  animation: crack-glint 5.5s ease-in-out infinite;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .mirror-frame-glow,
   .mirror-shimmer-anim,
+  .mirror-crack-anim,
   .mirror-float {
     animation: none;
   }

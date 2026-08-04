@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -46,6 +48,7 @@ const PORTALS = [
 
 export default async function Home() {
   const user = await getCurrentUser();
+  const hasCrack = fs.existsSync(path.join(process.cwd(), "public", "mirror", "crack.png"));
 
   return (
     <div className="flex flex-col flex-1">
@@ -54,7 +57,7 @@ export default async function Home() {
       <main className="flex-grow relative z-10 flex flex-col items-center justify-center py-24 md:py-32 px-4 md:px-16">
         <div className="text-center mb-24 max-w-7xl mx-auto">
           <div className="mb-8 animate-fade-up">
-            <HomeMirror />
+            <HomeMirror hasCrack={hasCrack} />
           </div>
           <p className="font-body-md text-body-md text-on-surface-variant italic animate-fade-up-delay-1 max-w-xl mx-auto">
             Face your reflection. Make the right choice.

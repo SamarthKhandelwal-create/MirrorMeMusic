@@ -1,8 +1,11 @@
-export function HomeMirror() {
+export function HomeMirror({ hasCrack = false }: { hasCrack?: boolean }) {
   return (
     <div className="w-full max-w-[420px] mx-auto mirror-float">
       <svg viewBox="0 0 500 630" className="w-full h-auto" role="img" aria-label="Welcome to MirrorMeMusic">
         <defs>
+          <clipPath id="glassClip">
+            <ellipse cx="250" cy="360" rx="181" ry="233" />
+          </clipPath>
           <radialGradient id="goldRadial" cx="170" cy="170" r="330" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#FFE55C" />
             <stop offset="30%" stopColor="#D4A017" />
@@ -63,6 +66,24 @@ export function HomeMirror() {
         {/* Mirror glass */}
         <ellipse cx="250" cy="360" rx="181" ry="233" fill="url(#mirrorDark)" />
         <ellipse cx="250" cy="360" rx="181" ry="233" fill="url(#shimmerGrad)" className="mirror-shimmer-anim" />
+
+        {/* Crack overlay, clipped to the glass. `screen` drops the image's white
+            background so only the bright fracture lines show through. */}
+        {hasCrack && (
+          <g clipPath="url(#glassClip)">
+            <image
+              href="/mirror/crack.png"
+              x="80"
+              y="215"
+              width="340"
+              height="290"
+              preserveAspectRatio="xMidYMid slice"
+              style={{ mixBlendMode: "screen" }}
+              opacity="0.72"
+              className="mirror-crack-anim"
+            />
+          </g>
+        )}
 
         {/* Soft inner vignette so the glass reads as depth, not flat fill */}
         <ellipse
