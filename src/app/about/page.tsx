@@ -279,12 +279,10 @@ function AiDisclaimer() {
           info
         </span>
         <p className="font-body-md text-[15px] text-on-surface-variant leading-relaxed opacity-85">
-          <strong className="text-primary font-normal">A note on the visuals above.</strong> Every
-          song, storyline, and visual concept in{" "}
-          <span className="italic text-primary">MIRROR</span> was written and created entirely by me,
-          Joey Koury. The imagery here was generated with AI as a tool to execute a vision that was
-          already fully written — the same way countless other creators use it. The ideas, the story,
-          and the music are mine.
+          <strong className="text-primary font-normal">A note on the visuals above.</strong> The
+          imagery here was generated with AI as a tool to execute a vision that was already fully
+          written — the same way countless other creators use it. The ideas, the story, and the
+          music are mine.
         </p>
       </div>
     </div>
