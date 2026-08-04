@@ -43,7 +43,6 @@ type MirrorSingle = {
   title: string;
   artifact: string;
   lesson: string;
-  story: string;
   accent: string;
   img: string;
 };
@@ -54,8 +53,6 @@ const MIRROR_SINGLES: MirrorSingle[] = [
     title: "Striped (XO, XO)",
     artifact: "The Striped Suit",
     lesson: "Become a new person",
-    story:
-      "A boy enters a world of mirrors and stripes, where his darker future self teaches him the consequences of bad decisions. A lesson in temptation, influence, and making the right choice.",
     accent: "#c9c9d4",
     img: "mirror/01-striped.jpg",
   },
@@ -64,8 +61,6 @@ const MIRROR_SINGLES: MirrorSingle[] = [
     title: "If Only",
     artifact: "The Blue Butterfly",
     lesson: "Chase your dreams",
-    story:
-      "A glimpse of the life he could've had if he chased love and his dreams. A lesson in opportunity, regret, and what slips away when you don't act.",
     accent: "#5b8def",
     img: "mirror/02-if-only.jpg",
   },
@@ -74,8 +69,6 @@ const MIRROR_SINGLES: MirrorSingle[] = [
     title: "Firecracker",
     artifact: "The Aztec Wildflower",
     lesson: "Love gives you power",
-    story:
-      "He travels to the past, gains fire and purpose through love and unity, and fights for something bigger than himself. A lesson in passion, power, and using your gifts for good.",
     accent: "#ff5a3c",
     img: "mirror/03-firecracker.jpg",
   },
@@ -84,8 +77,6 @@ const MIRROR_SINGLES: MirrorSingle[] = [
     title: "Mess Me Up",
     artifact: "The Purple Power Cord",
     lesson: "Cut the source, don't fight it",
-    story:
-      "Thrown into a broken world of pixels and chaos, he learns that you can't fight your demons head-on — you have to cut the source. A lesson in escaping toxicity and overcoming what drains you.",
     accent: "#a855f7",
     img: "mirror/04-mess-me-up.jpg",
   },
@@ -94,8 +85,6 @@ const MIRROR_SINGLES: MirrorSingle[] = [
     title: "Friends",
     artifact: "The Yellow Microphone",
     lesson: "Find your voice, change the game",
-    story:
-      "In a world that tries to silence him, he finds his voice and changes the game. A lesson in speaking up, standing out, and creating change.",
     accent: "#f5c542",
     img: "mirror/05-friends.jpg",
   },
@@ -104,8 +93,6 @@ const MIRROR_SINGLES: MirrorSingle[] = [
     title: "Don't Wanna Ask",
     artifact: "The Brown Acoustic Guitar",
     lesson: "Music is always there",
-    story:
-      "Surrounded by everything but fulfillment, he learns that even in solitude, music stays. A lesson in healing, self-worth, and knowing what you truly need.",
     accent: "#b08968",
     img: "mirror/06-dont-wanna-ask.jpg",
   },
@@ -114,8 +101,6 @@ const MIRROR_SINGLES: MirrorSingle[] = [
     title: "Why? (Deluxe)",
     artifact: "The Grey Sunglasses",
     lesson: "Protect your peace, move forward",
-    story:
-      "He steps into the real world as a new man — protected, confident, and ready for what's next. A lesson in growing up, protecting your peace, and walking into your new era.",
     accent: "#9ca3af",
     img: "mirror/07-why.jpg",
   },
@@ -331,12 +316,9 @@ function SingleCard({ single }: { single: MirrorSingle }) {
         <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">
           {single.artifact}
         </p>
-        <h3 className="font-headline-sm text-headline-sm" style={{ color: single.accent }}>
+        <h3 className="font-headline-sm text-headline-sm flex-1" style={{ color: single.accent }}>
           {single.title}
         </h3>
-        <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed flex-1">
-          {single.story}
-        </p>
         <div className="pt-3 border-t border-white/5">
           <p
             className="font-label-sm text-label-sm uppercase tracking-widest flex items-center gap-2"
@@ -406,11 +388,11 @@ export default async function AboutPage() {
                 family and friends, and cooking and trying new foods.
               </p>
               <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                MirrorMeMusic is my platform to help aspiring artists create, market, and release
-                their projects efficiently and affordably, while answering any questions they
-                might have about the business side of music. The entire mixtape MIRROR is
-                completely written and co-produced by me, from start to finish — and it&apos;s the
-                project that inspired this whole platform.
+                I built this platform to help aspiring artists create, market, and release their
+                projects efficiently and affordably, while answering the questions nobody explains
+                about the business side of music. It grew out of my own mixtape,{" "}
+                <span className="italic text-primary">MIRROR</span> — which I wrote and co-produced
+                from start to finish.
               </p>
             </div>
             <div className="md:col-span-5 grid grid-cols-2 gap-4 order-1 md:order-2">
@@ -512,9 +494,6 @@ export default async function AboutPage() {
             <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               Every song, storyline, and visual concept in <span className="italic text-primary">MIRROR</span>{" "}
               was written and created 100% by me, alone.
-            </p>
-            <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              MirrorMeMusic.com is built on my passion project — <span className="italic text-primary">MIRROR</span>.
             </p>
           </div>
         </section>

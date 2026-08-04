@@ -6,16 +6,7 @@ export function SiteFooter() {
           MirrorMeMusic
         </div>
 
-        <p className="font-body-md text-body-md text-on-surface-variant text-center max-w-2xl leading-relaxed opacity-75">
-          Every song, storyline, and visual concept in <span className="italic text-primary">MIRROR</span> was
-          created 100% by Joey Koury, alone.
-        </p>
-
-        <p className="font-label-sm text-label-sm text-on-surface-variant text-center tracking-wide opacity-60">
-          MirrorMeMusic.com is built on Joey&apos;s passion project — <span className="italic">MIRROR</span>.
-        </p>
-
-        <div className="font-label-sm text-label-sm text-outline mt-4 uppercase tracking-widest opacity-50">
+        <div className="font-label-sm text-label-sm text-outline uppercase tracking-widest opacity-50">
           © 2026 MirrorMeMusic
         </div>
       </div>
