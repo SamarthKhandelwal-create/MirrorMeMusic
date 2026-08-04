@@ -3,6 +3,13 @@ import path from "path";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getCurrentUser } from "@/lib/auth";
+import {
+  DISC_ONE,
+  DISC_TWO,
+  REMIX_NOTE,
+  PROJECT_SUMMARY,
+  type MirrorTrack,
+} from "@/lib/mirror-tracklist";
 
 function publicFileExists(relativePath: string) {
   return fs.existsSync(path.join(process.cwd(), "public", relativePath));
@@ -138,43 +145,148 @@ function ConceptBoard() {
   );
 }
 
-function TrackList({ tracks }: { tracks: MirrorSingle[] }) {
-  return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      <div className="text-center">
-        <p className="font-label-sm text-label-sm text-tertiary uppercase tracking-[0.3em]">Tracklist</p>
+function AlbumCover() {
+  const exists = publicFileExists("mirror/cover.jpg");
+  if (exists) {
+    return (
+      <div className="max-w-[560px] mx-auto">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/mirror/cover.jpg"
+          alt="MIRROR: Shattered — album cover"
+          className="w-full aspect-square object-cover ornate-border shadow-[0_20px_60px_rgba(0,0,0,0.7)]"
+        />
       </div>
-      <ol className="space-y-2">
-        {tracks.map((t) => (
-          <li
-            key={t.num}
-            className="flex items-center gap-4 px-5 py-4 transition-all duration-300 hover:translate-x-1"
-            style={{
-              background: `linear-gradient(90deg, ${t.accent}26 0%, ${t.accent}0d 45%, transparent 100%)`,
-              borderLeft: `3px solid ${t.accent}`,
-            }}
-          >
-            <span
-              className="font-label-sm text-label-sm tabular-nums w-8 shrink-0 opacity-80"
-              style={{ color: t.accent }}
+    );
+  }
+  return (
+    <div className="max-w-[560px] mx-auto">
+      <div className="aspect-square w-full ornate-border bg-surface-container-lowest flex flex-col items-center justify-center gap-4 text-center p-10">
+        <span className="material-symbols-outlined text-tertiary text-6xl opacity-40">album</span>
+        <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-70 leading-relaxed">
+          Add the album cover at
+          <br />
+          <code className="text-[11px] normal-case tracking-normal">public/mirror/cover.jpg</code>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function TrackRow({ track }: { track: MirrorTrack }) {
+  const isRemix = track.kind === "remix";
+  return (
+    <li
+      className="px-5 py-4 transition-all duration-300 hover:translate-x-1"
+      style={{
+        background: `linear-gradient(90deg, ${track.accent}26 0%, ${track.accent}0d 45%, transparent 100%)`,
+        borderLeft: `3px solid ${track.accent}`,
+      }}
+    >
+      <div className="flex items-baseline gap-4">
+        <span
+          className="font-label-sm text-label-sm tabular-nums w-7 shrink-0 opacity-80"
+          style={{ color: track.accent }}
+        >
+          {track.num}
+        </span>
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h4 className="font-headline-sm text-[17px] leading-tight" style={{ color: track.accent }}>
+              {track.title}
+            </h4>
+            {track.badge && (
+              <span
+                className="font-label-sm text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full border shrink-0"
+                style={{ color: track.accent, borderColor: `${track.accent}55` }}
+              >
+                {track.badge}
+              </span>
+            )}
+          </div>
+          {track.summary && (
+            <p className="font-body-md text-[15px] text-on-surface-variant leading-relaxed mt-2 opacity-85">
+              {track.summary}
+            </p>
+          )}
+          {track.artifact && (
+            <p
+              className="font-label-sm text-label-sm uppercase tracking-widest mt-3 flex items-start gap-2"
+              style={{ color: track.accent }}
             >
-              {t.num}
-            </span>
-            <span
-              className="font-headline-sm text-[17px] leading-tight flex-1"
-              style={{ color: t.accent }}
-            >
-              {t.title}
-            </span>
-            <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-55 hidden sm:block text-right">
-              {t.artifact}
-            </span>
-          </li>
-        ))}
-      </ol>
-      <p className="font-label-sm text-label-sm text-on-surface-variant text-center opacity-50 tracking-wide pt-2">
-        Interludes, skits, and monologues sit between these tracks in the full sequence.
-      </p>
+              <span aria-hidden className="shrink-0">◆</span>
+              <span className="normal-case tracking-normal font-body-md text-[14px]">
+                <strong className="uppercase tracking-widest text-label-sm">{track.artifact}</strong>
+                {track.artifactMeaning ? ` — ${track.artifactMeaning}` : ""}
+              </span>
+            </p>
+          )}
+        </div>
+      </div>
+      {isRemix && <span className="sr-only">Remix</span>}
+    </li>
+  );
+}
+
+function FullTrackList() {
+  return (
+    <div className="max-w-3xl mx-auto space-y-10">
+      <div className="text-center space-y-2">
+        <p className="font-label-sm text-label-sm text-tertiary uppercase tracking-[0.3em]">
+          Story &amp; Track Guide
+        </p>
+        <p className="font-body-md text-body-md text-on-surface-variant italic opacity-70">
+          MIRROR: SHATTERED (Deluxe Edition) — 24 tracks
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <h3 className="font-headline-sm text-headline-sm text-primary border-b border-primary/20 pb-3">
+          Disc 1
+        </h3>
+        <ol className="space-y-2">
+          {DISC_ONE.map((t) => (
+            <TrackRow key={t.num} track={t} />
+          ))}
+        </ol>
+      </div>
+
+      <div className="space-y-4">
+        <h3 className="font-headline-sm text-headline-sm text-primary border-b border-primary/20 pb-3">
+          Disc 2
+        </h3>
+        <ol className="space-y-2">
+          {DISC_TWO.map((t) => (
+            <TrackRow key={t.num} track={t} />
+          ))}
+        </ol>
+        <p className="font-body-md text-[15px] text-on-surface-variant leading-relaxed opacity-75 pt-2 px-5">
+          {REMIX_NOTE}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function AiDisclaimer() {
+  return (
+    <div className="max-w-3xl mx-auto">
+      <div className="border border-primary/25 bg-surface-container-lowest/60 px-6 py-5 flex gap-4 items-start">
+        <span
+          className="material-symbols-outlined text-tertiary text-[20px] shrink-0 mt-0.5 opacity-70"
+          aria-hidden
+        >
+          info
+        </span>
+        <p className="font-body-md text-[15px] text-on-surface-variant leading-relaxed opacity-85">
+          <strong className="text-primary font-normal">A note on the visuals above.</strong> Every
+          song, storyline, and visual concept in{" "}
+          <span className="italic text-primary">MIRROR</span> was written and created entirely by me,
+          Joey Koury. The imagery here was generated with AI as a tool to execute a vision that was
+          already fully written — the same way countless other creators use it. The ideas, the story,
+          and the music are mine.
+        </p>
+      </div>
     </div>
   );
 }
@@ -318,35 +430,50 @@ export default async function AboutPage() {
               A Visual Concept Album
             </p>
             <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
-              MIRROR: Shattered
+              MIRROR: SHATTERED
             </h2>
+            <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-[0.25em] opacity-70">
+              Deluxe Edition
+            </p>
             <p className="font-body-lg text-body-lg text-on-surface-variant italic max-w-2xl mx-auto">
               The journey. The lesson. The man you become.
             </p>
           </div>
 
-          <ConceptBoard />
+          {/* 1. Album cover, directly under the title */}
+          <AlbumCover />
 
-          <div className="max-w-3xl mx-auto text-center space-y-6">
-            <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              On his 13th birthday, a young, innocent Joey is pulled into his bathroom mirror by a
-              darker, future version of himself. He goes missing in the Mirrorverse for seven
-              years — the span of his teenage years — and eventually emerges as a changed adult.
-            </p>
-            <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              The project is written like a theatrical experience: songs, interludes, skits, and
-              monologues, many of them framed as therapy sessions that take place after he escapes
-              the Mirrorverse. Each world is its own track — its own color, artifact, and lesson —
-              and every choice he makes shapes who he becomes.
-            </p>
-            <p className="font-headline-sm text-headline-sm text-tertiary italic">
+          {/* 2. Full 24-track guide */}
+          <FullTrackList />
+
+          {/* 3. Project summary */}
+          <div className="max-w-3xl mx-auto space-y-6">
+            <div className="text-center">
+              <p className="font-label-sm text-label-sm text-tertiary uppercase tracking-[0.3em]">
+                Project Summary
+              </p>
+            </div>
+            {PROJECT_SUMMARY.map((para, i) => (
+              <p
+                key={i}
+                className="font-body-md text-body-md text-on-surface-variant leading-relaxed"
+              >
+                {para}
+              </p>
+            ))}
+            <p className="font-headline-sm text-headline-sm text-tertiary italic text-center pt-4">
               &ldquo;Make the right choice. Every world. Every choice. It all shapes the man
               you&apos;re destined to be.&rdquo;
             </p>
           </div>
 
-          <TrackList tracks={MIRROR_SINGLES} />
+          {/* 4. AI-generated art montage + disclaimer */}
+          <div className="space-y-6">
+            <ConceptBoard />
+            <AiDisclaimer />
+          </div>
 
+          {/* 5. Per-single artifact cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {MIRROR_SINGLES.map((single) => (
               <SingleCard key={single.num} single={single} />
@@ -386,8 +513,7 @@ export default async function AboutPage() {
             <h2 className="font-headline-sm text-headline-sm text-tertiary">Created by Joey Koury</h2>
             <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               Every song, storyline, and visual concept in <span className="italic text-primary">MIRROR</span>{" "}
-              was written and created 100% by me, alone. AI is used on this site to help artists
-              execute their own vision — the same way it&apos;s used by many other creators, like me.
+              was written and created 100% by me, alone.
             </p>
             <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               MirrorMeMusic.com is built on my passion project — <span className="italic text-primary">MIRROR</span>.
