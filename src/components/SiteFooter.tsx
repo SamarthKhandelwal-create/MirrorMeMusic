@@ -11,8 +11,7 @@ export function SiteFooter() {
 
         <p className="font-body-md text-body-md text-on-surface-variant text-center max-w-2xl leading-relaxed opacity-75">
           Every song, storyline, and visual concept in <span className="italic text-primary">MIRROR</span> was
-          created 100% by Joey Koury, alone. AI is used on this site to help artists execute their own
-          vision — the same way it&apos;s used by many other creators.
+          created 100% by Joey Koury, alone.
         </p>
 
         <p className="font-label-sm text-label-sm text-on-surface-variant text-center tracking-wide opacity-60">
