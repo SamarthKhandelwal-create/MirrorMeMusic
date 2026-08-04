@@ -70,21 +70,19 @@ export function HomeMirror() {
           fill="none" stroke="#000" strokeWidth="26" opacity="0.55"
         />
 
-        {/* Crown jewel — purple gem at the apex */}
+        {/* Crown boss at the apex */}
         <g transform="translate(250,111)" filter="url(#gemGlow)">
           <circle r="15" fill="url(#goldRadial)" />
           <circle r="10.5" fill="#170a26" />
-          <polygon points="0,-7.5 6.5,0 0,7.5 -6.5,0" fill="#9333ea" />
-          <polygon points="0,-7.5 6.5,0 0,0" fill="#c084fc" opacity="0.75" />
-          <polygon points="0,-7.5 -6.5,0 0,0" fill="#7c3aed" opacity="0.6" />
-          <circle cx="-2" cy="-3" r="1.9" fill="rgba(245,230,255,0.75)" />
+          <circle r="6.5" fill="url(#goldRadial)" opacity="0.9" />
+          <circle cx="-2" cy="-3" r="1.9" fill="rgba(255,240,200,0.6)" />
         </g>
 
         {/* Cardinal ornaments */}
         {[
           { x: 53,  y: 360, gem: "#D4A017" },
           { x: 447, y: 360, gem: "#D4A017" },
-          { x: 250, y: 609, gem: "#9333ea" },
+          { x: 250, y: 609, gem: "#D4A017" },
         ].map((o) => (
           <g key={`${o.x}-${o.y}`} transform={`translate(${o.x},${o.y})`} filter="url(#gemGlow)">
             <circle r="7.5" fill="url(#goldRadial)" />
