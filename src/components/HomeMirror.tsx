@@ -1,7 +1,33 @@
+"use client";
+
+import { useCallback, useRef, useState } from "react";
+import { playShatter } from "@/lib/shatter-sound";
+
 export function HomeMirror({ hasCrack = false }: { hasCrack?: boolean }) {
+  const [shattering, setShattering] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const strike = useCallback(() => {
+    // Ignore re-clicks while the animation is still running.
+    if (timerRef.current) return;
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    playShatter(0.45);
+    if (!reduced) setShattering(true);
+
+    timerRef.current = setTimeout(() => {
+      setShattering(false);
+      timerRef.current = null;
+    }, 900);
+  }, []);
+
   return (
-    <div className="w-full max-w-[420px] mx-auto mirror-float">
-      <svg viewBox="0 0 500 630" className="w-full h-auto" role="img" aria-label="Welcome to MirrorMeMusic">
+    <div className={`w-full max-w-[420px] mx-auto mirror-float ${shattering ? "mirror-jolt" : ""}`}>
+      {/* No role="img" here: that would hide the SVG's children from assistive
+          tech, making the strike control unreachable by keyboard. */}
+      <svg viewBox="0 0 500 630" className="w-full h-auto" aria-label="Welcome to MirrorMeMusic">
         <defs>
           <clipPath id="glassClip">
             <ellipse cx="250" cy="360" rx="181" ry="233" />
@@ -67,22 +93,39 @@ export function HomeMirror({ hasCrack = false }: { hasCrack?: boolean }) {
         <ellipse cx="250" cy="360" rx="181" ry="233" fill="url(#mirrorDark)" />
         <ellipse cx="250" cy="360" rx="181" ry="233" fill="url(#shimmerGrad)" className="mirror-shimmer-anim" />
 
-        {/* Light-burst overlay, clipped to the glass. crack.png carries a real
-            alpha channel (the source's flat backdrop was keyed out), so it
-            composites normally — no blend mode needed. The x/y are offset from
-            a naive centre because the burst sits at ~47%/36% of the source
-            image, not dead centre; this lands its core on the glass centre. */}
+        {/* Fracture overlay, clipped to the glass. crack.png is keyed out of
+            the source's checkerboard backdrop and recoloured white, so it
+            composites normally — no blend mode needed. The source is square and
+            near-centred (centroid ~49%/54%), so it sits square on the glass. */}
         {hasCrack && (
           <g clipPath="url(#glassClip)">
             <image
               href="/mirror/crack.png"
-              x="96"
-              y="278"
-              width="328"
-              height="231"
+              x="88"
+              y="196"
+              width="324"
+              height="324"
               preserveAspectRatio="xMidYMid meet"
-              opacity="0.85"
-              className="mirror-crack-anim"
+              className={shattering ? "mirror-crack-shatter" : "mirror-crack-anim"}
+            />
+            {/* Click target over the fracture. Sized to the shards, not the
+                whole glass, so the rest of the mirror stays non-interactive. */}
+            <circle
+              cx="250"
+              cy="358"
+              r="118"
+              fill="transparent"
+              className="cursor-pointer outline-none"
+              role="button"
+              tabIndex={0}
+              aria-label="Strike the mirror"
+              onClick={strike}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  strike();
+                }
+              }}
             />
           </g>
         )}
