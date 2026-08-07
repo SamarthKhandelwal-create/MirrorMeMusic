@@ -123,7 +123,7 @@ const LISTENING_ROOM = [
     heading: "Hear a website-exclusive demo from MIRROR",
     blurb:
       "An acoustic demo of “No One Knows Me” — track 9 on MIRROR, and unreleased anywhere else.",
-    file: "no-one-knows-me-acoustic-demo.mp3",
+    file: "no-one-knows-me-acoustic-demo.m4a",
     title: "No One Knows Me",
     subtitle: "Acoustic Demo · Unreleased",
   },
@@ -544,13 +544,14 @@ export default async function AboutPage() {
                     subtitle={entry.subtitle}
                   />
                 ) : (
+                  /* Visitor-facing, so this says "coming soon" rather than
+                     naming the file path the track is missing from. */
                   <div className="bg-surface-container-lowest ornate-border p-6 flex flex-col items-center gap-3 text-center py-8">
                     <span className="material-symbols-outlined text-on-surface-variant text-4xl opacity-50">
                       music_note
                     </span>
                     <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">
-                      Add <span className="normal-case tracking-normal italic">{entry.title}</span> at{" "}
-                      <code className="text-[10px]">public/audio/{entry.file}</code>
+                      Coming soon
                     </p>
                   </div>
                 )}
