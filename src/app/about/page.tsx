@@ -107,6 +107,28 @@ const MIRROR_SINGLES: MirrorSingle[] = [
   },
 ];
 
+/**
+ * Tracks in the listening section. Each renders only when its file is present
+ * in public/audio, so a track can be dropped in without a code change.
+ */
+const LISTENING_ROOM = [
+  {
+    heading: "Hear Days Before MIRROR",
+    blurb: "A sample from the prequel EP to the concept album that started it all.",
+    file: "head-over-heels.mp3",
+    title: "Head Over Heels",
+    subtitle: "Days Before MIRROR",
+  },
+  {
+    heading: "Hear a website-exclusive demo from MIRROR",
+    blurb:
+      "An acoustic demo of “No One Knows Me” — track 9 on MIRROR, and unreleased anywhere else.",
+    file: "no-one-knows-me-acoustic-demo.mp3",
+    title: "No One Knows Me",
+    subtitle: "Acoustic Demo · Unreleased",
+  },
+] as const;
+
 function ConceptBoard() {
   const exists = publicFileExists("mirror/concept-board.png");
   if (exists) {
@@ -336,7 +358,6 @@ function SingleCard({ single }: { single: MirrorSingle }) {
 
 export default async function AboutPage() {
   const user = await getCurrentUser();
-  const hasTrack = publicFileExists("audio/head-over-heels-demo.mp3");
 
   return (
     <div className="flex flex-col flex-1">
@@ -507,30 +528,34 @@ export default async function AboutPage() {
                 "radial-gradient(circle at center, var(--color-tertiary) 0%, transparent 70%)",
             }}
           />
-          <div className="relative z-10 max-w-2xl mx-auto space-y-8">
-            <div className="text-center">
-              <h2 className="font-headline-sm text-headline-sm text-tertiary mb-2">Hear MIRROR</h2>
-              <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">
-                A sample from the mixtape that started it all
-              </p>
-            </div>
-            {hasTrack ? (
-              <AudioPlayer
-                src="/audio/head-over-heels-demo.mp3"
-                title="Head Over Heels"
-                subtitle="Demo"
-              />
-            ) : (
-              <div className="bg-surface-container-lowest ornate-border p-6 flex flex-col items-center gap-3 text-center py-8">
-                <span className="material-symbols-outlined text-on-surface-variant text-4xl opacity-50">
-                  music_note
-                </span>
-                <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">
-                  Add a track at{" "}
-                  <code className="text-[10px]">public/audio/head-over-heels-demo.mp3</code>
-                </p>
+          <div className="relative z-10 max-w-2xl mx-auto space-y-14">
+            {LISTENING_ROOM.map((entry) => (
+              <div key={entry.file} className="space-y-6">
+                <div className="text-center space-y-2">
+                  <h2 className="font-headline-sm text-headline-sm text-tertiary">{entry.heading}</h2>
+                  <p className="font-body-md text-body-md text-on-surface-variant italic opacity-80 max-w-lg mx-auto leading-relaxed">
+                    {entry.blurb}
+                  </p>
+                </div>
+                {publicFileExists(`audio/${entry.file}`) ? (
+                  <AudioPlayer
+                    src={`/audio/${entry.file}`}
+                    title={entry.title}
+                    subtitle={entry.subtitle}
+                  />
+                ) : (
+                  <div className="bg-surface-container-lowest ornate-border p-6 flex flex-col items-center gap-3 text-center py-8">
+                    <span className="material-symbols-outlined text-on-surface-variant text-4xl opacity-50">
+                      music_note
+                    </span>
+                    <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">
+                      Add <span className="normal-case tracking-normal italic">{entry.title}</span> at{" "}
+                      <code className="text-[10px]">public/audio/{entry.file}</code>
+                    </p>
+                  </div>
+                )}
               </div>
-            )}
+            ))}
           </div>
         </section>
       </main>
