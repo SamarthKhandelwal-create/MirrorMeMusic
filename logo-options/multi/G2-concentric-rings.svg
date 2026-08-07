@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" width="34" height="34">
+  <rect width="34" height="34" rx="7" fill="#581c87"/>
+  <path d="M17 0.5 L33.5 17 L17 33.5 L0.5 17 Z" fill="#581c87"/>
+  <path d="M17 3.1999999999999993 L30.8 17 L17 30.8 L3.1999999999999993 17 Z" fill="#6d28d9"/>
+  <path d="M17 5.9 L28.1 17 L17 28.1 L5.9 17 Z" fill="#7e22ce"/>
+  <path d="M17 8.6 L25.4 17 L17 25.4 L8.6 17 Z" fill="#9333ea"/>
+  <path d="M17 11.3 L22.7 17 L17 22.7 L11.3 17 Z" fill="#a855f7"/>
+  <path d="M17 14 L20 17 L17 20 L14 17 Z" fill="#8b5cf6"/>
+  <path d="M17 3 L31 17 L17 31 L3 17 Z M17 9.6 L24.4 17 L17 24.4 L9.6 17 Z" fill="#000" fill-rule="evenodd"/>
+</svg>

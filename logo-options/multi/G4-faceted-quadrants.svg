@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" width="34" height="34">
+  <defs>
+    <linearGradient id="q1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="q2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#7e22ce"/>
+    </linearGradient>
+    <linearGradient id="q3" x1="1" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#6d28d9"/><stop offset="100%" stop-color="#581c87"/>
+    </linearGradient>
+    <linearGradient id="q4" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+  </defs>
+  <rect width="34" height="34" rx="7" fill="#150a24"/>
+  <path d="M17 3 L31 17 L17 31 L3 17 Z" fill="url(#q1)"/>
+  <path d="M17 3 L31 17 L17 17 Z" fill="url(#q2)"/>
+  <path d="M31 17 L17 31 L17 17 Z" fill="url(#q3)"/>
+  <path d="M3 17 L17 31 L17 17 Z" fill="url(#q4)"/>
+  <path d="M17 3 L31 17 L17 31 L3 17 Z M17 9.6 L24.4 17 L17 24.4 L9.6 17 Z" fill="#000" fill-rule="evenodd"/>
+</svg>
