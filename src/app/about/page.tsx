@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { AudioPlayer } from "@/components/AudioPlayer";
 import { getCurrentUser } from "@/lib/auth";
 import {
   DISC_ONE,
@@ -513,38 +514,23 @@ export default async function AboutPage() {
                 A sample from the mixtape that started it all
               </p>
             </div>
-            <div className="bg-surface-container-lowest ornate-border p-6 flex flex-col items-center gap-5">
-              {hasTrack ? (
-                <>
-                  <div className="text-center">
-                    <p className="font-headline-sm text-headline-sm text-primary">
-                      Head Over Heels
-                    </p>
-                    <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-70 mt-1">
-                      Demo
-                    </p>
-                  </div>
-                  <audio
-                    controls
-                    preload="metadata"
-                    className="w-full"
-                    src="/audio/head-over-heels-demo.mp3"
-                  >
-                    Your browser doesn&apos;t support audio playback.
-                  </audio>
-                </>
-              ) : (
-                <div className="flex flex-col items-center gap-3 text-center py-4">
-                  <span className="material-symbols-outlined text-on-surface-variant text-4xl opacity-50">
-                    music_note
-                  </span>
-                  <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">
-                    Add a track at{" "}
-                    <code className="text-[10px]">public/audio/head-over-heels-demo.mp3</code>
-                  </p>
-                </div>
-              )}
-            </div>
+            {hasTrack ? (
+              <AudioPlayer
+                src="/audio/head-over-heels-demo.mp3"
+                title="Head Over Heels"
+                subtitle="Demo"
+              />
+            ) : (
+              <div className="bg-surface-container-lowest ornate-border p-6 flex flex-col items-center gap-3 text-center py-8">
+                <span className="material-symbols-outlined text-on-surface-variant text-4xl opacity-50">
+                  music_note
+                </span>
+                <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">
+                  Add a track at{" "}
+                  <code className="text-[10px]">public/audio/head-over-heels-demo.mp3</code>
+                </p>
+              </div>
+            )}
           </div>
         </section>
       </main>
