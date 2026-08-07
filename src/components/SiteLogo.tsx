@@ -1,24 +1,24 @@
+import Image from "next/image";
+
 /**
- * Site mark: a black diamond mirror frame on a purple field, matching the
- * hand sketch. The band between the outer and inner diamond is filled solid
- * (via evenodd) rather than stroked, so it stays legible at favicon sizes.
+ * Site mark: the rendered purple diamond mirror.
+ *
+ * Sourced from logo-options/IMG_3606.png, masked to the diamond so it carries
+ * real transparency — the original had a near-black backdrop baked in, which
+ * would show as a dark square wherever the surrounding surface isn't the same
+ * colour.
  */
 export function SiteLogo({ size = 34 }: { size?: number }) {
   return (
-    <svg
+    <Image
+      src="/logo-mark.png"
+      alt=""
+      aria-hidden="true"
       width={size}
       height={size}
-      viewBox="0 0 34 34"
-      fill="none"
-      aria-hidden="true"
-      className="shrink-0"
-    >
-      <rect width="34" height="34" rx="7" fill="#9333ea" />
-      <path
-        d="M17 3 L31 17 L17 31 L3 17 Z M17 9.6 L24.4 17 L17 24.4 L9.6 17 Z"
-        fill="#000"
-        fillRule="evenodd"
-      />
-    </svg>
+      priority
+      className="shrink-0 select-none"
+      style={{ width: size, height: size }}
+    />
   );
 }
