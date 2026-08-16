@@ -3,6 +3,30 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
+// Serverless Postgres (Neon, Supabase) suspends an idle compute and takes a few
+// seconds to wake. Prisma's default 5s connect timeout can expire during that
+// cold start, failing the build with "P1001: Can't reach database server".
+// Give the migration connection room to wait out the wake-up.
+const COLD_START_CONNECT_TIMEOUT_SECONDS = 30;
+
+function withConnectTimeout(url: string | undefined) {
+  if (!url) return url;
+  try {
+    const parsed = new URL(url);
+    if (!parsed.searchParams.has("connect_timeout")) {
+      parsed.searchParams.set(
+        "connect_timeout",
+        String(COLD_START_CONNECT_TIMEOUT_SECONDS),
+      );
+    }
+    return parsed.toString();
+  } catch {
+    // Not a URL we can parse — hand it to Prisma untouched so it reports the
+    // real problem rather than one masked by this helper.
+    return url;
+  }
+}
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
@@ -12,6 +36,8 @@ export default defineConfig({
     // Migrations run over a direct (non-pooled) connection. Connection poolers
     // in transaction mode can't run the DDL/advisory locks Migrate needs.
     // Falls back to DATABASE_URL when the provider offers only one URL.
-    url: process.env["DIRECT_DATABASE_URL"] ?? process.env["DATABASE_URL"],
+    url: withConnectTimeout(
+      process.env["DIRECT_DATABASE_URL"] ?? process.env["DATABASE_URL"],
+    ),
   },
 });
