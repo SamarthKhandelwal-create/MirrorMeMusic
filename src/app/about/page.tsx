@@ -11,6 +11,7 @@ import {
   PROJECT_SUMMARY,
   type MirrorTrack,
 } from "@/lib/mirror-tracklist";
+import { SPOTIFY_ARTIST_URL, UPCOMING_SINGLE } from "@/lib/links";
 
 function publicFileExists(relativePath: string) {
   return fs.existsSync(path.join(process.cwd(), "public", relativePath));
@@ -106,6 +107,77 @@ const MIRROR_SINGLES: MirrorSingle[] = [
     img: "mirror/07-why.jpg",
   },
 ];
+
+type RealVisual = {
+  title: string;
+  caption: string;
+  accent: string;
+  img: string;
+  /** Real photos come in mixed aspect ratios; tall ones get a taller frame. */
+  tall?: boolean;
+};
+
+/**
+ * Photographed artifacts, shown beneath the AI-generated concept art as a
+ * supplement to it. The mirror leads because it is the album's central symbol
+ * rather than any one track's artifact.
+ */
+const REAL_VISUALS: RealVisual[] = [
+  {
+    title: "The Mirror",
+    caption: "The symbol the whole album is built around",
+    accent: "#d4c08a",
+    img: "mirror/real/00-the-mirror.jpg",
+    tall: true,
+  },
+  {
+    title: "The Blue Butterfly",
+    caption: "02 · If Only",
+    accent: "#5b8def",
+    img: "mirror/real/02-blue-butterfly.jpg",
+    tall: true,
+  },
+  {
+    title: "The Aztec Wildflower",
+    caption: "03 · Firecracker",
+    accent: "#ff5a3c",
+    img: "mirror/real/03-aztec-wildflower.jpg",
+    tall: true,
+  },
+  {
+    title: "The Purple Power Cord",
+    caption: "04 · Mess Me Up",
+    accent: "#a855f7",
+    img: "mirror/real/04-purple-power-cord.jpg",
+  },
+  {
+    title: "The Yellow Microphone",
+    caption: "05 · Friends",
+    accent: "#f5c542",
+    img: "mirror/real/05-yellow-microphone.jpg",
+    tall: true,
+  },
+  {
+    title: "The Brown Acoustic Guitar",
+    caption: "06 · Don't Wanna Ask",
+    accent: "#b08968",
+    img: "mirror/real/06-acoustic-guitar.jpg",
+    tall: true,
+  },
+  {
+    title: "The Grey Sunglasses",
+    caption: "07 · Why?",
+    accent: "#9ca3af",
+    img: "mirror/real/07-grey-sunglasses.jpg",
+  },
+];
+
+/**
+ * Anything else photographed that isn't one of the seven artifacts. Drop files
+ * into public/mirror/other/ and list them here; the section hides itself when
+ * the list is empty.
+ */
+const OTHER_VISUALS: RealVisual[] = [];
 
 /**
  * Tracks in the listening section. Each renders only when its file is present
@@ -287,10 +359,10 @@ function AiDisclaimer() {
           info
         </span>
         <p className="font-body-md text-[15px] text-on-surface-variant leading-relaxed opacity-85">
-          <strong className="text-primary font-normal">A note on the visuals above.</strong> The
-          imagery here was generated with AI as a tool to execute a vision that was already fully
-          written — the same way countless other creators use it. The ideas, the story, and the
-          music are mine.
+          <strong className="text-primary font-normal">A note on the concept art.</strong> The
+          AI-generated imagery in this section was made with AI as a tool to execute a vision that
+          was already fully written — the same way countless other creators use it. The ideas, the
+          story, and the music are mine.
         </p>
       </div>
     </div>
@@ -352,6 +424,122 @@ function SingleCard({ single }: { single: MirrorSingle }) {
           </p>
         </div>
       </div>
+    </div>
+  );
+}
+
+function RealVisualCard({ visual }: { visual: RealVisual }) {
+  if (!publicFileExists(visual.img)) return null;
+  return (
+    <figure
+      className="group ornate-border bg-surface-container-low overflow-hidden flex flex-col"
+      style={{ borderColor: `${visual.accent}44` }}
+    >
+      <div
+        className={`w-full overflow-hidden ${visual.tall ? "aspect-[3/4]" : "aspect-square"}`}
+        style={{ background: `linear-gradient(160deg, ${visual.accent}1a, transparent 70%)` }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`/${visual.img}`}
+          alt={visual.title}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+      </div>
+      <figcaption className="p-5 space-y-2">
+        <h4 className="font-headline-sm text-[17px] leading-tight" style={{ color: visual.accent }}>
+          {visual.title}
+        </h4>
+        <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">
+          {visual.caption}
+        </p>
+      </figcaption>
+    </figure>
+  );
+}
+
+function RealVisualsGallery() {
+  const main = REAL_VISUALS.filter((v) => publicFileExists(v.img));
+  const other = OTHER_VISUALS.filter((v) => publicFileExists(v.img));
+  if (main.length === 0 && other.length === 0) return null;
+
+  return (
+    <section className="space-y-10 pt-4">
+      <div className="text-center space-y-4">
+        <p className="font-label-sm text-label-sm text-tertiary uppercase tracking-[0.3em]">
+          More Real Visuals
+        </p>
+        <h3 className="font-headline-md text-headline-md text-primary">The Artifacts, Photographed</h3>
+        <p className="font-body-md text-body-md text-on-surface-variant italic max-w-2xl mx-auto leading-relaxed opacity-85">
+          The real objects behind the concept art above — the mirror at the center of the story, and
+          the artifacts each song is built around.
+        </p>
+      </div>
+
+      {main.length > 0 && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {main.map((visual) => (
+            <RealVisualCard key={visual.img} visual={visual} />
+          ))}
+        </div>
+      )}
+
+      {other.length > 0 && (
+        <div className="space-y-6 pt-6">
+          <div className="text-center">
+            <p className="font-label-sm text-label-sm text-tertiary uppercase tracking-[0.3em]">
+              Other Visuals
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {other.map((visual) => (
+              <RealVisualCard key={visual.img} visual={visual} />
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function SpotifyPanel() {
+  const hasArtist = SPOTIFY_ARTIST_URL.length > 0;
+  const hasSingle = UPCOMING_SINGLE.released && UPCOMING_SINGLE.spotifyUrl.length > 0;
+  if (!hasArtist && !hasSingle) return null;
+
+  return (
+    <div className="max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+      {hasSingle && (
+        <a
+          href={UPCOMING_SINGLE.spotifyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ornate-border bg-surface-container-lowest px-6 py-4 flex items-center gap-3 text-tertiary hover:text-primary transition-colors w-full sm:w-auto justify-center"
+        >
+          <span className="material-symbols-outlined" aria-hidden>
+            play_circle
+          </span>
+          <span className="font-label-sm text-label-sm uppercase tracking-widest">
+            Listen to &ldquo;{UPCOMING_SINGLE.title}&rdquo;
+          </span>
+        </a>
+      )}
+      {hasArtist && (
+        <a
+          href={SPOTIFY_ARTIST_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ornate-border bg-surface-container-lowest px-6 py-4 flex items-center gap-3 text-tertiary hover:text-primary transition-colors w-full sm:w-auto justify-center"
+        >
+          <span className="material-symbols-outlined" aria-hidden>
+            library_music
+          </span>
+          <span className="font-label-sm text-label-sm uppercase tracking-widest">
+            Joey Koury on Spotify
+          </span>
+        </a>
+      )}
     </div>
   );
 }
@@ -482,6 +670,9 @@ export default async function AboutPage() {
             ))}
           </div>
 
+          {/* 6. Photographed artifacts, supplementing the concept art above */}
+          <RealVisualsGallery />
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
             <div className="bg-surface-container-low p-6 ornate-border space-y-3">
               <span className="material-symbols-outlined text-tertiary">groups</span>
@@ -557,6 +748,7 @@ export default async function AboutPage() {
                 )}
               </div>
             ))}
+            <SpotifyPanel />
           </div>
         </section>
       </main>
