@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LobbyMusic } from "@/components/LobbyMusic";
 import { HomeMirror } from "@/components/HomeMirror";
+import { PortalCard } from "@/components/PortalCard";
 import { getCurrentUser } from "@/lib/auth";
 
 const PORTALS = [
@@ -72,49 +73,15 @@ export default async function Home() {
             </p>
           )}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 w-full max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 w-full max-w-md lg:max-w-[1400px] mx-auto">
           {PORTALS.map((portal, i) => (
-            <div
+            <PortalCard
               key={portal.href}
-              style={{ animationDelay: `${0.2 + i * 0.1}s` }}
-              className={`group h-[540px] [perspective:1200px] w-full animate-fade-up ${i === 1 ? "mt-0 md:mt-16" : ""}`}
-            >
-              <div className="relative h-full w-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.23,1,0.32,1)] preserve-3d group-hover:rotate-y-180">
-                <div className="absolute inset-0 backface-hidden ornate-frame transition-all duration-500 group-hover:-translate-y-2">
-                  <div className="w-full h-full mirror-surface flex flex-col items-center justify-center p-8">
-                    <div
-                      className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-screen z-0 pointer-events-none filter contrast-125 brightness-75"
-                      style={{ backgroundImage: `url('${portal.image}')`, opacity: 0.2, mixBlendMode: "screen" }}
-                    />
-                    <div className="relative z-10 flex flex-col items-center etched-content mirror-glow bg-black/35 backdrop-blur-[2px] rounded-2xl px-8 py-6">
-                      <h2 className="font-headline-md text-headline-md tracking-tighter mb-2">{portal.title}</h2>
-                      <div className="h-px w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent my-4" />
-                      <p className="font-label-sm text-label-sm tracking-widest uppercase mt-2">{portal.subtitle}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute inset-0 backface-hidden rotate-y-180 bg-[#110b1c]/95 backdrop-blur-2xl border-2 border-[#1f182a] flex flex-col items-center justify-center p-10 text-center shadow-[inset_0_0_80px_rgba(0,0,0,0.8)] overflow-hidden rounded-[50%_/_60%_60%_40%_40%]">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-tertiary opacity-50" />
-                  <span className="material-symbols-outlined text-[32px] text-tertiary/50 mb-6 group-hover:drop-shadow-[0_0_25px_rgba(221,183,255,0.7)]">
-                    {portal.icon}
-                  </span>
-                  <h3 className="font-headline-sm text-headline-sm text-primary mb-2">{portal.backTitle}</h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-8">
-                    {portal.backCopy}
-                  </p>
-                  <Link
-                    href={portal.requiresAuth && !user ? "/login" : portal.href}
-                    className="relative group/btn overflow-hidden px-8 py-4 border border-tertiary rounded-full font-label-sm text-label-sm text-primary transition-all duration-300 hover:shadow-[0_0_20px_rgba(221,183,255,0.4)] bg-transparent press-scale"
-                  >
-                    <span className="absolute inset-0 w-full h-full bg-tertiary/10 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out" />
-                    <span className="relative z-10 flex items-center gap-2">
-                      {portal.cta}{" "}
-                      <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </div>
+              portal={portal}
+              href={portal.requiresAuth && !user ? "/login" : portal.href}
+              delay={`${0.2 + i * 0.1}s`}
+              offset={i === 1}
+            />
           ))}
         </div>
       </main>

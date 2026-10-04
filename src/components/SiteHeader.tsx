@@ -32,7 +32,7 @@ export function SiteHeader({
           <SiteLogo />
           MirrorMeMusic
         </Link>
-        <nav className="hidden md:flex items-center gap-12">
+        <nav className="hidden lg:flex items-center gap-12">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -92,6 +92,26 @@ export function SiteHeader({
           )}
         </div>
       </div>
+      {/*
+        The primary nav above is desktop-only. Without this row the site's
+        sections are unreachable on a phone, so repeat the links as a scrollable
+        strip under the logo.
+      */}
+      <nav className="lg:hidden flex items-center gap-6 overflow-x-auto px-4 pb-3 -mt-1 border-t border-white/5 pt-3">
+        {NAV_LINKS.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={
+              active === link.label
+                ? "text-primary border-b border-primary pb-1 font-label-sm text-label-sm tracking-widest uppercase whitespace-nowrap shrink-0"
+                : "text-on-surface-variant font-label-sm text-label-sm tracking-widest uppercase whitespace-nowrap shrink-0"
+            }
+          >
+            {link.label}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }

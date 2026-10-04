@@ -131,6 +131,12 @@ const REAL_VISUALS: RealVisual[] = [
     tall: true,
   },
   {
+    title: "The Striped Suit",
+    caption: "01 · Striped (XO, XO)",
+    accent: "#c9c2b6",
+    img: "mirror/real/01-striped-suit.jpg",
+  },
+  {
     title: "The Blue Butterfly",
     caption: "02 · If Only",
     accent: "#5b8def",

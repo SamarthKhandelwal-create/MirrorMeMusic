@@ -8,6 +8,8 @@
  *  3. A short low thud for physical weight.
  */
 
+import { unlockThen } from "./audio-unlock";
+
 let ctx: AudioContext | null = null;
 
 function getCtx(): AudioContext | null {
@@ -15,8 +17,6 @@ function getCtx(): AudioContext | null {
   if (!ctx || ctx.state === "closed") {
     ctx = new AudioContext();
   }
-  // Browsers start the context suspended until a gesture; a click is one.
-  if (ctx.state === "suspended") void ctx.resume();
   return ctx;
 }
 
@@ -101,7 +101,13 @@ export function playShatter(volume = 0.5) {
   const ac = getCtx();
   if (!ac) return;
 
-  const t = ac.currentTime;
+  unlockThen(ac, () => schedule(ac, volume));
+}
+
+function schedule(ac: AudioContext, volume: number) {
+  // Small lead so every node lands comfortably in the future even if the clock
+  // ticks between here and the last start() call.
+  const t = ac.currentTime + 0.02;
   const master = ac.createGain();
   master.gain.value = volume;
 

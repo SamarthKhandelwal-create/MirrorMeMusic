@@ -116,10 +116,17 @@ export function HomeMirror({ hasCrack = false }: { hasCrack?: boolean }) {
               r="118"
               fill="transparent"
               className="cursor-pointer outline-none"
+              style={{ touchAction: "manipulation" }}
               role="button"
               tabIndex={0}
               aria-label="Strike the mirror"
               onClick={strike}
+              // iOS Safari doesn't reliably synthesize click on non-interactive
+              // SVG shapes, so drive the strike from the touch itself. The
+              // guard in `strike` keeps the follow-up click from double-firing.
+              onPointerDown={(e) => {
+                if (e.pointerType === "touch") strike();
+              }}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();

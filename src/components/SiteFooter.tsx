@@ -6,8 +6,8 @@ export function SiteFooter() {
           MirrorMeMusic
         </div>
 
-        <div className="font-label-sm text-label-sm text-outline uppercase tracking-widest opacity-50">
-          © 2026 MirrorMeMusic
+        <div className="font-label-sm text-label-sm text-outline uppercase tracking-widest opacity-50 text-center text-balance">
+          © 2026 Joseph Koury. All rights reserved.
         </div>
       </div>
     </footer>

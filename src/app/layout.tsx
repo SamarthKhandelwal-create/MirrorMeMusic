@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Source_Serif_4, Metrophobic } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
@@ -30,6 +30,17 @@ export const metadata: Metadata = {
   title: "MirrorMeMusic",
   description:
     "MirrorMeMusic is an AI-guided platform for independent artists to develop release strategy, branding, and creative direction with the AI Strategist.",
+};
+
+/**
+ * Without this, mobile browsers lay the page out at ~980px and scale it down,
+ * which is why the site only ever looked right on a desktop. Zoom is left
+ * unrestricted so the album text stays accessible.
+ */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#171021",
 };
 
 export default function RootLayout({

@@ -138,9 +138,62 @@ html {
 }
 .backface-hidden {
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 .rotate-y-180 {
   transform: rotateY(180deg);
+}
+
+/*
+ * The portal cards reveal their link on the hover-flipped back face. Touch
+ * devices have no hover, so the card is flipped by tapping it instead: the
+ * button toggles [data-flipped] and we drive the same rotation from that.
+ * The 3D flip itself is kept — unstacking the faces would show both at once
+ * and destroy the mirror.
+ */
+/*
+ * Safari won't reliably cull a back-facing side here: the back face's
+ * backdrop-filter forms a stacking context that defeats backface-visibility,
+ * so the hidden face bleeds through as mirrored text. Drive each face's
+ * visibility from the flip state instead, switching at the midpoint of the
+ * 1200ms rotation so a face only ever vanishes while it is edge-on.
+ */
+/* Plain link under each mirror, only where there's no hover (phones, iPads). */
+.portal-touch-link {
+  display: none;
+}
+@media (hover: none) {
+  .portal-touch-link {
+    display: flex;
+  }
+}
+
+@media (hover: none) {
+  .portal-card[data-flipped="true"] .preserve-3d {
+    transform: rotateY(180deg);
+  }
+  .portal-card .portal-face-back {
+    visibility: hidden;
+    transition: visibility 0s linear 600ms;
+  }
+  .portal-card[data-flipped="true"] .portal-face-back {
+    visibility: visible;
+  }
+  .portal-card[data-flipped="true"] .portal-face-front {
+    visibility: hidden;
+    transition: visibility 0s linear 600ms;
+  }
+}
+
+/*
+ * Where hover exists, the tap targets must not intercept anything: the card
+ * flips on hover alone and the front face has to stay a plain mirror.
+ */
+@media (hover: hover) {
+  .portal-face-front,
+  .portal-back-close {
+    pointer-events: none;
+  }
 }
 .etched-content {
   color: #f5eefc;

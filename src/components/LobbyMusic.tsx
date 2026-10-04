@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { unlockThen } from "@/lib/audio-unlock";
 
 /**
  * Generative ambient lobby music, synthesized in-browser (no audio file).
@@ -132,12 +133,10 @@ export function LobbyMusic() {
     timersRef.current.push(id);
   }, []);
 
-  const startSynth = useCallback(() => {
-    const ctx = new AudioContext();
-    ctxRef.current = ctx;
+  const buildVoices = useCallback((ctx: AudioContext) => {
     chordRef.current = 0;
     const chord = PROGRESSION[0];
-    const t = ctx.currentTime;
+    const t = ctx.currentTime + 0.02;
 
     const master = ctx.createGain();
     master.gain.setValueAtTime(0, t);
@@ -152,7 +151,7 @@ export function LobbyMusic() {
     lfoGain.gain.value = 0.05;
     lfo.connect(lfoGain);
     lfoGain.connect(master.gain);
-    lfo.start();
+    lfo.start(t);
 
     // Delay network shared by pads and bells.
     const makeDelay = (time: number, feedback: number) => {
@@ -198,7 +197,7 @@ export function LobbyMusic() {
         lpf.connect(gain);
         gain.connect(master);
         gain.connect(wash);
-        osc.start();
+        osc.start(t);
         padVoices.push({ osc, gain, detune, ratio: i });
       });
     });
@@ -211,23 +210,45 @@ export function LobbyMusic() {
     subGain.gain.value = 0.13;
     subOsc.connect(subGain);
     subGain.connect(master);
-    subOsc.start();
+    subOsc.start(t);
 
     nodesRef.current = { master, padVoices, subOsc, subGain, bellBus, lfo };
 
     const chordTimer = setTimeout(() => advanceChordRef.current(), CHORD_SECONDS * 1000);
     timersRef.current.push(chordTimer);
     scheduleBell();
-
-    setPlaying(true);
   }, [scheduleBell]);
+
+  const startSynth = useCallback(() => {
+    const ctx = new AudioContext();
+    ctxRef.current = ctx;
+    setPlaying(true);
+    // iOS hands back a suspended context whose clock is stuck at 0. Resume from
+    // this tap, then build the voices only once the clock is really moving —
+    // otherwise every oscillator starts against a zero timestamp and the whole
+    // synth is silent. See lib/audio-unlock.
+    unlockThen(ctx, () => {
+      // The user may have hit pause again before the unlock landed.
+      if (ctxRef.current !== ctx) return;
+      buildVoices(ctx);
+    });
+  }, [buildVoices]);
 
   const stopSynth = useCallback(() => {
     const ctx = ctxRef.current;
     const nodes = nodesRef.current;
-    if (!ctx || !nodes) return;
+    if (!ctx) return;
 
     clearTimers();
+
+    // Paused during the iOS unlock window: the voices were never built, so
+    // there's nothing to fade — just drop the context.
+    if (!nodes) {
+      ctxRef.current = null;
+      setPlaying(false);
+      void ctx.close().catch(() => {});
+      return;
+    }
     nodes.master.gain.setTargetAtTime(0, ctx.currentTime, 0.7);
 
     const closing = ctx;
